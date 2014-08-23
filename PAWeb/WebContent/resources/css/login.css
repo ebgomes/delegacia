@@ -1,0 +1,45 @@
+#content .wrap {
+    padding: 40px 0px 0px 0px;
+}
+
+#login {
+    /*background: #c1faac;
+    border: 1px dashed #85ca6c;
+     */
+    width: 300px;
+    margin: auto;
+    padding: 0px 15px;
+    background-color: #F4F4F4;
+    border: 1px solid #E0E0E0;
+    /*-moz-border-radius:5px 5px 5px 5px;*/ 
+}
+
+#loginGrupoEmpresarial {
+    /*background: #c1faac;
+    border: 1px dashed #85ca6c;
+     */
+    width: 400px;
+    margin: auto;
+    padding: 0px 15px;
+    background-color: #F4F4F4;
+    border: 1px solid #E0E0E0;
+    /*-moz-border-radius:5px 5px 5px 5px;*/ 
+}
+
+#login dl dt {
+    color: #3b9805;
+    padding: 7px 0px 3px 0px;
+}
+
+#login dl dd input {
+    width: 250px;
+}
+
+#login .forget-submit {
+    margin: 15px 0px 10px 0px;;
+}
+
+#login .forget-submit .float-left a {
+    color: #1776bf;
+    font-size: 10px;
+}

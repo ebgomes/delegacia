@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:dc="http://java.sun.com/jsf/composite/component">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="breadcrumb">
+		<h:link value="Início" outcome="/index" />
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText value="Dogs" />
+		</span>
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText
+				value="#{uFFormController.consulta ? 'Consulta' : 'Cadastro'}" />
+		</span>
+	</ui:define>
+	<ui:define name="conteudo">
+		<p:growl id="msg" />
+		<h1>#{uFFormController.consulta ? 'UF' : 'UF'}</h1>
+		<p:panel>
+			<h:form>
+				<br />
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Sigla..:" />					
+					<p:inputText size="5"
+						value="#{uFFormController.atual.sigla}"
+						required="true" requiredMessage="Campo Sigla Obrigatório" disabled="#{uFFormController.consulta}"
+						maxlength="2" onkeydown="this.value = this.value.toUpperCase();" onkeyup="this.value = this.value.toUpperCase()">
+						<p:ajax listener="#{uFFormController.mudouAlgumValor}" />						
+					</p:inputText>	
+					<p:outputLabel value="Descricao..:" />
+					<p:inputText size="75"
+						value="#{uFFormController.atual.descricao}"
+						required="true" requiredMessage="Campo Descição Obrigatório" disabled="#{uFFormController.consulta}"
+						maxlength="255" onkeydown="this.value = this.value.toUpperCase();" onkeyup="this.value = this.value.toUpperCase()">
+						<p:ajax listener="#{uFFormController.mudouAlgumValor}" />
+					</p:inputText>		
+				</h:panelGrid>	
+			
+				<h:inputHidden
+					value="#{uFFormController.atual.entityState}" />
+				<p:commandButton value="Confirma"
+					action="#{uFFormController.confirma}"
+					styleClass="button button-blue-green" process="@form"
+					rendered="#{!uFFormController.consulta}" update=":msg" />
+				<p:commandButton value="Voltar"
+					action="#{uFFormController.voltar}"
+					styleClass="button button-blue-green" immediate="true" />
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,48 @@
+package br.com.arquitetura;
+
+/*
+import org.hibernate.proxy.HibernateProxy;
+*/
+
+public class ObjectUtils {
+
+    public static final <T> T defaultIfNull(final T value, final T _default) {
+        return value == null ? _default : value;
+    }
+
+    public static Object get(final Object self, final String attribute) {
+        try {
+            return BeanUtil.getNestedAttributeValue(self, attribute);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static final <T> boolean isNull(final T value) {
+        return value == null;
+    }
+
+    public static final <T> boolean notIsNull(final T value) {
+        return !isNull(value);
+    }
+    /*
+    public static final DCContextShared getDCContextSharedAt(Object... parameters) {
+        for (Object parameter : parameters) {
+            if (notIsNull(parameter) && parameter instanceof DCContextShared)
+                return (DCContextShared) parameter;
+        }
+        return null;
+    }
+   
+
+    @SuppressWarnings("unchecked")
+    public static final <T> T pure(T object) {
+        if (object instanceof HibernateProxy) {
+            return (T) ((HibernateProxy) object).getHibernateLazyInitializer().getImplementation();
+        }
+        return object;
+    }
+    */
+
+}

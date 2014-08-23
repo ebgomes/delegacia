@@ -1,0 +1,20 @@
+package br.com.rondofrio.remote;
+
+import javax.ejb.Local;
+
+import br.com.pa.arquitetura.IRemote;
+import br.com.pa.model.Material;
+import br.com.pa.model.SaldosDeEstoque;
+
+@Local
+public interface SaldoDeEstoqueRemote extends IRemote {
+
+	public SaldosDeEstoque localizaPorMaterial(Material material);
+	
+	public SaldosDeEstoque atualizaSaldoDeEstoqueDoMaterial(Material material);
+	
+	public void reprocessaSaldosDeEstoqueDoMaterial(Material material);
+	
+	public void reprocessaSaldosDeEstoque();
+	
+}

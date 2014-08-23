@@ -1,0 +1,174 @@
+/*
+    Document   : form
+    Created on : 16/03/2010, 09:49:26
+    Author     : Thiago Felipe Festa
+    Description:
+        Folha de estilo responsï¿½vel pelos formulï¿½rios
+*/
+
+input.input-search {
+    padding-right: 20px;
+    width: 143px;
+}
+
+input.input-search-icon {
+    position: relative;
+    margin-left: -22px;
+    padding-right: 5px;
+    cursor: default;
+}
+
+input[type='text'], textarea, input[type='password'], select, input.ui-inputfield.ui-state-default
+{
+    border: 1px solid gray;
+    /*width: 143px;*/
+}
+
+input.ui-inputfield.ui-corner-all
+{
+	-moz-border-radius: 0 !important/*{cornerRadius}*/; 
+	-webkit-border-radius: 0 !important/*{cornerRadius}*/; 
+	border-radius: 0 !important/*{cornerRadius}*/; 	
+}
+
+input[type='text']:focus, textarea:focus, input[type='password']:focus, select:focus
+{
+    border: 2px solid orange;
+}
+/*
+input.ui-inputfield {
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	padding: 1px 0 !important;
+	*/
+	/*height: 16px !important;*/
+/*
+}
+*/
+
+input.ui-inputfield.ui-state-hover {
+    border-color: gray !important;
+}
+
+input.ui-inputfield.ui-state-focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border-color: orange !important;
+}
+
+
+
+
+/* ESTILIZAÃ‡ÃƒO DE FORMULÃ�RIO */
+
+label {
+    /*display: block;*/
+}
+
+#linha-formulario {
+    height: 35px;
+    padding-top: 10px;
+    width: 100%;
+}
+
+#divFormEsquerda {
+    float: left;
+    width: 33%;
+}
+
+#divFormDireita {
+    float: right;
+    width: 67%;
+}
+
+#divSubFormEsquerda {
+    float: left;
+    width: 49%;
+}
+
+#divSubFormDireita {
+    float: right;
+    width: 50%;
+}
+
+.textField {
+    width: 85%;
+}
+
+input[readonly='readonly'] 
+{
+    background: #F2F3F1;
+}
+
+input[readonly].ui-inputfield.ui-state-default
+{
+	background: #F2F3F1 !important;
+}
+
+input[readonly='readonly']:focus
+{
+    border: 1px solid #000000;
+}
+
+
+
+/**
+ Estilos associados Ã  barra superior do picklist
+*/
+
+#divIdPickList {
+    padding-top: 7px;
+    width: 740px;
+}
+
+#divIdPickList #divIdPickListDisponivel {
+    width: 52%;
+    float: left;
+}
+
+#divIdPickList #divIdPickListVinculado {
+    width: 48%;
+    float: right;
+}
+
+.ui-picklist .ui-picklist-list {
+    height:300px !important;
+    width:340px !important;
+}
+
+.ui-picklist .ui-state-default {
+	background-image: none !important;
+}
+
+.ui-picklist .ui-picklist-button{
+	background-color: white;
+}
+
+.ui-picklist .ui-picklist-list li{
+	background-color: white;
+	border: 0;	
+}
+
+.ui-picklist-button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ui-state-hover{
+	background-color: #1E8ADC;
+}
+
+.ui-picklist .ui-picklist-list .ui-state-highlight{
+	background-color: #1E8ADC;
+	border: 0;	
+}
+
+/*Estilos para posicionamento do formul�rio*/
+
+div.linha
+{
+	width: 100%;
+	margin-bottom: 10px;
+}
+			
+div.coluna
+{
+	display: inline-block;  
+	margin-right: 5px;	
+}		

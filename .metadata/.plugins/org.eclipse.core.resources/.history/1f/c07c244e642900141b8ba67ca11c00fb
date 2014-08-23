@@ -1,0 +1,12 @@
+package br.com.rondofrio.remote;
+
+import src.br.com.rondofrio.arquitetura.CanConfirm;
+import src.br.com.rondofrio.arquitetura.CanFind;
+import src.br.com.rondofrio.arquitetura.CanList;
+import src.br.com.rondofrio.arquitetura.IRemote;
+
+@Local
+public interface LoginRemote extends IRemote, CanFind<Login>, CanList<Login>,
+		CanConfirm<Login> {
+
+}

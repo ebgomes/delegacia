@@ -1,0 +1,37 @@
+package br.com.rondofrio.ejb;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+
+import br.com.pa.model.TipoProcesso;
+import br.com.pa.remote.TipoProcessoRemote;
+
+@Stateless
+public class TipoProcessoEJB implements TipoProcessoRemote {
+
+	@Override
+	public TipoProcesso findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TipoProcesso reload(TipoProcesso entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TipoProcesso confirm(TipoProcesso entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TipoProcesso> list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

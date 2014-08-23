@@ -1,0 +1,79 @@
+package br.com.pa.model;
+
+import java.util.List;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import lombok.Getter;
+import lombok.Setter;
+import br.com.pa.arquitetura.AbstractEntity;
+import br.com.pa.arquitetura.Data;
+import br.com.pa.arquitetura.Identifiable;
+
+@Getter
+@Setter
+@Entity
+public class Processo extends AbstractEntity implements Identifiable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue
+	private Long id;
+
+	private String numeroProcesso;
+
+	private MotivoProcesso motivo;
+
+	private boolean prescrito;
+
+	private String condutor;
+
+	private String cpf;
+
+	private String cnh;
+
+	private Integer pontuacao;
+
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = "conteudo", column = @Column(name = "dataPortaria")) })
+	private Data dataPortaria;
+
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = "conteudo", column = @Column(name = "dataArquivamento")) })
+	private Data dataArquivamento;
+
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = "conteudo", column = @Column(name = "dataEntregaCNH")) })
+	private Data dataEntregaCNH;
+
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = "conteudo", column = @Column(name = "dataPrimeiraMulta")) })
+	private Data dataPrimeiraMulta;
+
+	@OneToMany(mappedBy = "processo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<SituacaoProcesso> situacoes;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idloginCadastro")
+	private Login usuarioCadastro;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idloginAlteracao")
+	private Login usuarioAlteracao;
+	
+	@Column(length = 1000)
+	private String observacao;
+
+}

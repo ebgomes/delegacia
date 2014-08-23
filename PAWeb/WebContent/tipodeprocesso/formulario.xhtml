@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:dc="http://java.sun.com/jsf/composite/component"
+	xmlns:alfa="http://java.sun.com/jsf/composite/alfa">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="breadcrumb">
+		<h:link value="Início" outcome="/index" />
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText value="Tipo de Processos" />
+		</span>
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText
+				value="#{tipoProcessoFormController.consulta ? 'Consulta' : 'Cadastro'}" />
+		</span>
+		
+	</ui:define>
+	<ui:define name="conteudo">
+		<p:growl id="msgs" life="3000" />
+		<h1>#{tipoProcessoFormController.consulta ? 'Consulta ' :
+			'Cadastro '} Tipo de Processo</h1>
+		<p:panel>
+			<h:form id="form_confirma" prependId="false">
+				<h:inputHidden
+					value="#{tipoProcessoFormController.atual.entityState}" />
+				<p:commandButton value="Salvar" title="Alt + s"
+					action="#{tipoProcessoFormController.confirma}"
+					styleClass="button button-blue-green" process="@form"
+					rendered="#{!tipoProcessoFormController.consulta}"
+					update=":msgs" accesskey="s" />
+				<p:commandButton value="Voltar" title="Alt + v"
+					action="#{tipoProcessoFormController.voltar}"
+					styleClass="button button-blue-green" immediate="true"
+					accesskey="v" />
+				<p:separator />
+				
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

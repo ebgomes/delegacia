@@ -1,0 +1,5 @@
+package controllers.tipoprocesso;
+
+public class TipoProcesso {
+
+}

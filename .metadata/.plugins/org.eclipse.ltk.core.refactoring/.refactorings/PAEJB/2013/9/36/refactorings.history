@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;br.com.rondofrio.ejb.EstoqueEJB&apos; to &apos;AjusteDeEstoqueEJB&apos;&#x0D;&#x0A;- Original project: &apos;RondofrioEJB&apos;&#x0D;&#x0A;- Original element: &apos;br.com.rondofrio.ejb.EstoqueEJB&apos;&#x0D;&#x0A;- Renamed element: &apos;br.com.rondofrio.ejb.AjusteDeEstoqueEJB&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;EstoqueEJB&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/ejbModule&lt;br.com.rondofrio.ejb{EstoqueEJB.java[EstoqueEJB" matchStrategy="1" name="AjusteDeEstoqueEJB" qualified="false" references="true" similarDeclarations="false" stamp="1378555583515" textual="false" version="1.0"/>
+</session>

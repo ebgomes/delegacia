@@ -1,0 +1,32 @@
+package controllers.tipoprocesso;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import lombok.Getter;
+import lombok.Setter;
+import br.com.pa.model.TipoProcesso;
+import br.com.pa.remote.TipoProcessoRemote;
+
+@ManagedBean
+@ViewScoped
+@Getter
+@Setter
+public class TipoProcessoListController {
+
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	TipoProcessoRemote tipos;
+
+	List<TipoProcesso> lista = new ArrayList<TipoProcesso>();
+
+	public List<TipoProcesso> listarTipoProcessos() {
+		return tipos.list();
+	}
+
+}

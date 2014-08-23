@@ -1,0 +1,13 @@
+.ui-message-error.ui-widget.ui-corner-all.ui-message-icon-only.ui-helper-clearfix
+{
+	background: none repeat scroll 0 0 transparent;
+	border: 0 none;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+.ui-message-error.ui-widget.ui-corner-all.ui-message-icon-only.ui-helper-clearfix:after
+{
+	content: none;
+}

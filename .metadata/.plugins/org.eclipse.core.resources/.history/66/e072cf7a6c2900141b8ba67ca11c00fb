@@ -1,0 +1,14 @@
+package br.com.rondofrio.remote;
+
+import javax.ejb.Local;
+
+import pa.arquitetura.CanConfirm;
+import pa.arquitetura.CanFind;
+import pa.arquitetura.CanList;
+import pa.arquitetura.IRemote;
+import br.com.rondofrio.model.Estoque;
+
+@Local
+public interface EstoqueRemote extends IRemote, CanFind<Estoque>, CanConfirm<Estoque>, CanList<Estoque> {
+	
+}

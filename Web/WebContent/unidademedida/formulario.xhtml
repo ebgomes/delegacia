@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:dc="http://java.sun.com/jsf/composite/component">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="breadcrumb">
+		<h:link value="Início" outcome="/index" />
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText value="Dogs" />
+		</span>
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText
+				value="#{unidadeMedidaFormController.consulta ? 'Consulta' : 'Cadastro'}" />
+		</span>
+	</ui:define>
+	<ui:define name="conteudo">
+		<p:growl />
+		<h1>#{unidadeMedidaFormController.consulta ? 'Unidade Medida' : 'Unidade Medida'}</h1>
+		<p:panel>
+			<h:form>
+				<br />
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Descricao..:" />
+					<h:inputText size="75"
+						value="#{unidadeMedidaFormController.atual.descricao}"
+						required="true" disabled="#{unidadeMedidaFormController.consulta}"
+						maxlength="255">
+						<p:ajax listener="#{unidadeMedidaFormController.mudouAlgumValor}" />
+					</h:inputText>							
+					<h:outputLabel value="Sigla..:" />			
+					<h:inputText size="75"
+						value="#{unidadeMedidaFormController.atual.sigla}"
+						required="true" disabled="#{unidadeMedidaFormController.consulta}"
+						maxlength="255">
+						<p:ajax listener="#{unidadeMedidaFormController.mudouAlgumValor}" />
+					</h:inputText>					
+				</h:panelGrid>
+			</h:form>
+			<br />
+			<h:form id="form_confirma" prependId="false">
+				<h:inputHidden
+					value="#{unidadeMedidaFormController.atual.entityState}" />
+				<p:commandButton value="Confirma"
+					action="#{unidadeMedidaFormController.confirma}"
+					styleClass="button button-blue-green" process="@this"
+					rendered="#{!unidadeMedidaFormController.consulta}" />
+				<p:commandButton value="Voltar"
+					action="#{unidadeMedidaFormController.voltar}"
+					styleClass="button button-blue-green" immediate="true" />
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,7 @@
+#GlassFish 3
+#Sat Aug 23 10:52:54 BRT 2014
+org.eclipse.jst.jee.server\:EJB=c\:\\glassfish312\\glassfish\\domains\\rondofrio\\eclipseApps\\EJB
+org.eclipse.jst.jee.server\:RondofrioWeb=c\:\\glassfish312\\glassfish\\domains\\rondofrio\\eclipseApps\\RondofrioWeb
+org.eclipse.jst.jee.server\:RondofrioEE=c\:\\glassfish312\\glassfish\\domains\\rondofrio\\eclipseApps\\RondofrioEE
+org.eclipse.jst.jee.server\:Web=c\:\\glassfish312\\glassfish\\domains\\rondofrio\\eclipseApps\\Web
+org.eclipse.jst.jee.server\:Ear=c\:\\glassfish312\\glassfish\\domains\\rondofrio\\eclipseApps\\Ear

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:dc="http://java.sun.com/jsf/composite/component">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="breadcrumb">
+		<h:link value="Início" outcome="/index" />
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText value="Dogs" />
+		</span>
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText
+				value="#{cidadeFormController.consulta ? 'Consulta' : 'Cadastro'}" />
+		</span>
+	</ui:define>
+	<ui:define name="conteudo">
+		<p:growl id="msg" />
+		<h1>#{cidadeFormController.consulta ? 'Cidade' : 'Cidade'}</h1>
+		<p:panel>
+			<h:form>
+				<br />
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Descricao..:" required="true" />
+					<p:inputText size="75"
+						value="#{cidadeFormController.atual.descricao}" required="true"
+						disabled="#{cidadeFormController.consulta}" maxlength="255"
+						requiredMessage="Campo Descição Obrigatório"
+						onkeydown="this.value = this.value.toUpperCase();"
+						onkeyup="this.value = this.value.toUpperCase()">
+						<p:ajax listener="#{cidadeFormController.mudouAlgumValor}" />
+					</p:inputText>
+					<p:outputLabel value="UF..:" />
+					<p:selectOneMenu size="1"
+						value="#{cidadeFormController.atual.uf.codigo}" required="true"
+						requiredMessage="Campo UF Obrigatório">
+						<f:selectItem value="#{null}" itemLabel="-" />
+						<f:selectItems value="#{cidadeFormController.uf}" var="uf"
+							itemValue="#{uf.id}" itemLabel="#{uf.descricao}" />
+						<p:ajax listener="#{cidadeFormController.mudouAlgumValor}" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+
+				<br />
+
+				<h:inputHidden value="#{cidadeFormController.atual.entityState}" />
+				<p:commandButton value="Confirma"
+					action="#{cidadeFormController.confirma}"
+					styleClass="button button-blue-green" process="@form"
+					rendered="#{!cidadeFormController.consulta}" update=":msg" />
+				<p:commandButton value="Voltar"
+					action="#{cidadeFormController.voltar}"
+					styleClass="button button-blue-green" immediate="true" />
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

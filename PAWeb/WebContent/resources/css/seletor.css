@@ -1,0 +1,38 @@
+/* SELETOR */
+
+#cboxWrapper {
+	background: url("../images/bg-groupbox.jpg") repeat scroll 0 0 transparent;
+}
+
+#cboxTitle {
+	color:#000000 !important;
+	font-weight:bold;
+	top:-18px !important;
+	left: 5px !important;
+	font-size: 11px;
+}
+
+#cboxClose {
+	background: url("../images/close-window.png") no-repeat scroll 0 0 transparent !important;
+	right: 2px !important;
+	top: -18px !important;
+	width: 16px !important;
+}
+
+input.inputCode
+{
+	margin-right: 2px;
+	width: 130px;	
+}
+
+input.inputDescription
+{
+    background-color: #F2F3F1;
+    width: 350px;
+    color: #000000;
+}
+
+input.inputDescription:focus
+{
+    border: 1px solid #000000;
+}

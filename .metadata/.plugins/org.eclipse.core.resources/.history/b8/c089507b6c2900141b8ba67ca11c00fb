@@ -1,0 +1,24 @@
+package pa.arquitetura;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public final class CollectionUtils {
+
+    public static <T> T[] array(T... var) {
+        return var;
+    }
+
+    public static Boolean isNullOrEmpty(final Collection<?> data) {
+        return data == null || data.isEmpty();
+    }
+
+    public static <T> List<T> concatena(Collection<T> uma, Collection<T> outra) {
+        List<T> concatenada = new ArrayList<T>();
+        concatenada.addAll(uma);
+        concatenada.addAll(outra);
+        return concatenada;
+    }
+
+}

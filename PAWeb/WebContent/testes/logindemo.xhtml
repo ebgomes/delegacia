@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:dc="http://java.sun.com/jsf/composite/component">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="breadcrumb">
+		<h:link value="Início" outcome="/index" />
+		<h:outputText value=" &raquo; " />
+		<span><h:outputText value="Faturamento" /> </span>		
+	</ui:define>
+	<ui:define name="conteudo">
+		<h:form id="form">
+			<p:commandButton id="botaoCriar" icon="ui-icon-circle-plus"
+				title="Login" value="&nbsp;Criar" oncomplete="dlg.show()"
+				immediate="true" />
+			<h:outputLink id="loginLink" value="javascript:void(0)"
+				onclick="PF('dlg').show()" title="login">
+				<p:graphicImage value="/images/login.png" />
+			</h:outputLink>
+			<p:growl id="growl" showDetail="true" life="3000" />
+
+			<p:dialog id="dialog" header="Login" widgetVar="dlg" modal="true" 
+				resizable="false">
+
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="username" value="Username:" />
+					<p:inputText value="#{loginBean.username}" id="username"
+						required="true" label="username" />
+
+					<h:outputLabel for="password" value="Password:" />
+					<h:inputSecret value="#{loginBean.password}" id="password"
+						required="true" label="password" />
+
+					<f:facet name="footer">
+						<p:commandButton id="loginButton" value="Login" update="growl"
+							actionListener="#{loginBean.login}" process="@form"
+							oncomplete="handleValidator(xhr, status, args, 'dialog')" />
+					</f:facet>
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

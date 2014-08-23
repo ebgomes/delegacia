@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/template.xhtml">
+
+	<ui:define name="css">
+		<h:outputStylesheet library="css" name="login.css"></h:outputStylesheet>
+	</ui:define>
+
+	<ui:define name="menu"></ui:define>
+
+	<ui:define name="breadcrumb"></ui:define>
+
+	<ui:define name="conteudo">
+		<p:growl id="msg" />
+		<h:form id="formulario">
+		<f:event type="preRenderComponent"
+					listener="#{loginController.inicio()}" />
+
+			<p:panel id="panelLogin"  style="border:none">
+				<p:messages id="mensagens" />
+				
+				<div class="wrap">
+					<div id="login" style="margin-bottom: 20px">
+						<dl>
+							<dt>
+								<h:outputText value="Usuario" />
+							</dt>
+							<dd>
+								<p:inputText id="usernam" required="true"
+									value="#{loginController.login.usuario}"
+									requiredMessage="O campo Login é Obrigatório" />
+								<p:focus />
+							</dd>
+							<dt>
+								<h:outputText value="Senha" />
+							</dt>
+							<dd>
+								<p:password id="password" value="#{loginController.login.senha}"
+									required="true" requiredMessage="O campo Senha é Obrigatório" />
+							
+
+							</dd>
+						</dl>
+						<div class="forget-submit">
+							
+							<div class="float-left">
+								<h:commandButton id="botao" value="Logar"
+									styleClass="button button-blue-green"
+									action="#{loginController.autenticar}">
+									<f:ajax execute="@form" render="formulario" event="action"
+										immediate="false" />
+								</h:commandButton>
+							</div>
+							<div class="float-right">
+								<p:commandButton id="botaoNovo" value="Novo"
+									styleClass="button button-green"
+									action="#{loginController.criarNovo()}"
+									update=":form_criar_login"
+									oncomplete="dialogNovo.show()"
+									>
+									
+								</p:commandButton>
+							</div>
+							
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			</p:panel>
+		</h:form>
+		
+		<p:dialog widgetVar="dialogNovo" modal="true" width="350" height="300" style="text-align:center; border:0px; !important;">
+			<h:form id="form_criar_login">
+			<h1>CADASTRO DE NOVO USUÁRIO</h1>
+			<p:panel>
+				<h:panelGrid columns="1">
+				    <p:outputLabel value="Nome Completo:"  />
+					<p:inputText value="#{loginController.loginNovo.nomeDoUsuario}" size="50" required="true"/>
+					<p:outputLabel value="Usuario"  />
+					<p:inputText value="#{loginController.loginNovo.usuario}" size="35" required="true"/>
+					<p:outputLabel value="Senha"  />
+					<p:password value="#{loginController.loginNovo.senha}" size="30" required="true"/>
+					<p:outputLabel value="Repetir Senha"  />
+					<p:password value="#{loginController.senhaParaConfirmar}" size="30" required="true"/>
+					
+					<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"  styleClass="button button-blue-green"
+									actionListener="#{loginController.criar}"
+									update=":msg"/>
+					<p:commandButton value="Cancelar"  styleClass="button button-red"
+									oncomplete="dialogNovo.hide()" immediate="true"/>
+					</h:panelGrid>								
+				</h:panelGrid>	
+			</p:panel>
+			</h:form>
+		</p:dialog>
+		
+	</ui:define>
+</ui:composition>
+
+</html>

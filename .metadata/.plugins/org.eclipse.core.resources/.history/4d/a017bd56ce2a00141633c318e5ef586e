@@ -1,0 +1,43 @@
+package br.com.pa.model;
+
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import lombok.Getter;
+import lombok.Setter;
+import br.com.pa.arquitetura.AbstractEntity;
+import br.com.pa.arquitetura.Identifiable;
+
+@Getter
+@Setter
+public class Cidade extends AbstractEntity implements Identifiable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue
+	private Long id;
+
+	private String descricao;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idUf")
+	private MotivoProcesso uf;
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	public void setCodigo(Long codigo) {
+		setId(codigo);
+	}
+
+	public Long getCodigo() {
+		return getId();
+	}
+
+}

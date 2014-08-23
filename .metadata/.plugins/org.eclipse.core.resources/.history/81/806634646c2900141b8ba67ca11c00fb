@@ -1,0 +1,22 @@
+package br.com.rondofrio.remote;
+
+import java.util.List;
+
+import javax.ejb.Local;
+
+import br.com.rondofrio.arquitetura.CanConfirm;
+import br.com.rondofrio.arquitetura.CanFind;
+import br.com.rondofrio.arquitetura.CanList;
+import br.com.rondofrio.arquitetura.IRemote;
+import br.com.rondofrio.common.ParceiroParaAutoComplete;
+import br.com.rondofrio.model.Parceiro;
+
+@Local
+public interface ParceiroRemote extends IRemote, CanFind<Parceiro>, CanConfirm<Parceiro>, CanList<Parceiro>{
+
+	public List<ParceiroParaAutoComplete> listaDeParceirosParaAutoComplete(
+			String descricao);
+	
+	public List<Parceiro> listaDeParceirosPorNome(String descricao); 
+
+}

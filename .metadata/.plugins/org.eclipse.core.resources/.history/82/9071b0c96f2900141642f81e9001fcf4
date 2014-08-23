@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:dc="http://java.sun.com/jsf/composite/component"
+	xmlns:alfa="http://java.sun.com/jsf/composite/alfa">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="breadcrumb">
+		<h:link value="Início" outcome="/index" />
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText value="Arquivo para Geração de Notas" />
+		</span>
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText
+				value="#{capaArquivoFormController.consulta ? 'Consulta' : 'Cadastro'}" />
+		</span>
+		
+	</ui:define>
+	<ui:define name="conteudo">
+		<p:growl id="msgs" life="3000" />
+		<h1>#{capaArquivoFormController.consulta ? 'Consulta ' :
+			'Cadastro '} Arquivo para Geração de Notas</h1>
+		<p:panel>
+			<h:form id="form_confirma" prependId="false">
+				<h:inputHidden
+					value="#{capaArquivoFormController.atual.entityState}" />
+				<p:commandButton value="Salvar" title="Alt + s"
+					action="#{capaArquivoFormController.confirma}"
+					styleClass="button button-blue-green" process="@form"
+					rendered="#{!capaArquivoFormController.consulta}"
+					update=":msgs" accesskey="s" />
+				<p:commandButton value="Voltar" title="Alt + v"
+					action="#{capaArquivoFormController.voltar}"
+					styleClass="button button-blue-green" immediate="true"
+					accesskey="v" />
+				<p:separator />
+				<h:panelGrid columns="1">
+					<p:outputLabel value="Nome Arquivo" for="descricao" />
+					<p:inputText required="true" id="descricao" value="#{capaArquivoFormController.atual.descricao}" disabled="#{capaArquivoFormController.consulta}" size="45" />
+					<p:focus for="descricao" />
+				</h:panelGrid>
+				<p:panel>
+					<p:outputPanel id="panelGeral">
+					<h:panelGrid columns="3">
+						<h:panelGroup>
+							<p:panel header="Arquivo Produtor (txt)">
+								<h:form enctype="multipart/form-data" id="form_produtor">  
+		  								<p:fileUpload fileUploadListener="#{capaArquivoFormController.uploadArquivoProdutor}" mode="advanced" label="Escolher..." invalidFileMessage="Tipo Invalido" 
+		            					update="msgProdutor :form_confirma:panelGeral" auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(txt)$/"/>
+		            					<p:messages id="msgProdutor" closable="true" />  
+								</h:form>
+								<p:outputLabel value="#{capaArquivoFormController.descricaoArquivoProdutor}" id="descricaoArqProdutor" />
+							</p:panel> 
+						</h:panelGroup>
+						<h:panelGroup>
+							<p:panel header="Arquivo O.C Venda (csv)">
+								<h:form enctype="multipart/form-data" id="form_venda">  
+		  								<p:fileUpload fileUploadListener="#{capaArquivoFormController.uploadArquivoVenda}" mode="advanced"  label="Escolher..."
+		            					update=":msgs :form_confirma:panelGeral" auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(csv)$/" invalidFileMessage="Tipo Invalido"/>
+		            			</h:form>
+		            			<p:outputLabel value="#{capaArquivoFormController.descricaoArquivoVenda}" id="descricaoArquivoVenda" />
+							</p:panel> 
+						</h:panelGroup>
+						<h:panelGroup>
+							<p:panel header="Arquivo O.C Remessa (csv)">
+								<h:form enctype="multipart/form-data" id="form_remessa">  
+		  								<p:fileUpload fileUploadListener="#{capaArquivoFormController.uploadArquivoRemessa}" mode="advanced" label="Escolher..." invalidFileMessage="Tipo Invalido"
+		            					update=":msgs :form_confirma:panelGeral" auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(csv)$/"/>
+		            			</h:form>
+		            			<p:outputLabel value="#{capaArquivoFormController.descricaoArquivoRemessa}" id="descricaoArquivoRemessa" />
+							</p:panel>	 
+						</h:panelGroup>
+					</h:panelGrid>
+					</p:outputPanel>
+					<p:commandButton  action="#{capaArquivoFormController.criaItemArquivo}" value="Utilizar"
+						styleClass="button button-blue-green" process="@form" immediate="true" id="botaoUtilizar"
+						rendered="#{!capaArquivoFormController.consulta}" disabled="{capaArquivoFormController.botaoUtilizar}" update="listaItens :form_confirma:panelGeral "/>	
+				</p:panel>
+					<p:panel>
+						<p:panel header="Dados Arquivo">
+							<p:dataTable id="listaItens" 
+								value="#{capaArquivoFormController.atual.listaItensArquivo}" var="objeto"
+								rowKey="#{objeto.oCVenda}" 
+								emptyMessage="Nenhum registro encontrado !" paginator="true"
+								paginatorPosition="bottom" rows="10"
+								>
+								
+								<p:column headerText="Produtor">
+									<h:outputText value="#{objeto.produtor.nome}" />
+								</p:column>
+								<p:column headerText="Aviario">
+									<h:outputText value="#{objeto.aviario}" />
+								</p:column>
+								<p:column headerText="O.C. Venda">
+									<h:outputText value="#{objeto.oCVenda}" />
+								</p:column>
+								<p:column headerText="Qtde Venda">
+									<h:outputText value="#{objeto.qtdeVenda}" />
+								</p:column>
+								<p:column headerText="O.C. Remessa">
+									<h:outputText value="#{objeto.oCRemessa}" />
+								</p:column>
+								<p:column headerText="Qtde Remessa">
+									<h:outputText value="#{objeto.qtdeRemessa}" />
+								</p:column>
+								<p:column headerText="Ações" rendered="#{!capaArquivoFormController.consulta}">
+									<h:commandLink value="Remover"
+										action="#{capaArquivoFormController.removeItem(objeto)}"
+										onclick="return confirm('Deseja realmente remover ?')"
+										immediate="true" rendered="#{!capaArquivoFormController.atual.utilizado}" />
+								</p:column>		
+							</p:dataTable>	
+						</p:panel>
+				</p:panel>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

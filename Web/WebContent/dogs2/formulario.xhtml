@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:dc="http://java.sun.com/jsf/composite/component">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="breadcrumb">
+		<h:link value="Início" outcome="/index" />
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText value="Dogs" />
+		</span>
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText
+				value="#{dogs2FormController.consulta ? 'Consulta' : 'Cadastro'}" />
+		</span>
+	</ui:define>
+	<ui:define name="conteudo">
+		<p:growl />
+		<h1>#{dogs2FormController.consulta ? 'Consulta Dogs' : 'Cadastro Dogs'}</h1>
+		<p:panel>
+			<h:form>
+				<br />
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Descricao..:" />
+					<h:inputText size="75"
+						value="#{dogs2FormController.atual.name}"
+						required="true" disabled="#{dogs2FormController.consulta}"
+						maxlength="255">
+						<p:ajax listener="#{dogs2FormController.mudouAlgumValor}" />
+					</h:inputText>
+					<h:outputLabel value="Tamanho..:" />
+					<h:inputText size="75"						
+						value="#{dogs2FormController.atual.weight}"
+						required="true" disabled="#{dogs2FormController.consulta}"
+						maxlength="255">
+						<p:ajax listener="#{dogs2FormController.mudouAlgumValor}" />
+					</h:inputText>
+				</h:panelGrid>
+			</h:form>
+			<br />
+			<h:form id="form_confirma" prependId="false">
+				<h:inputHidden
+					value="#{dogs2FormController.atual.entityState}" />
+				<p:commandButton value="Confirma"
+					action="#{dogs2FormController.confirma}"
+					styleClass="button button-blue-green" process="@this"
+					rendered="#{!dogs2FormController.consulta}" />
+				<p:commandButton value="Voltar"
+					action="#{dogs2FormController.voltar}"
+					styleClass="button button-blue-green" immediate="true" />
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

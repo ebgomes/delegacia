@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<syncparticipants>
+<participant displayName="SVN (/RondofrioCommon, /RondofrioEE, /RondofrioEJB, /RondofrioWeb)" id="org.tigris.subversion.subclipse.participant" secondary_id="1393784438091">
+<data root="false">
+<org.eclipse.team.ui.TEAMSUBSRCIBERSETTINGS org.eclipse.team.ui.SCOPE_TYPE="ResourceScope">
+<org.eclipse.team.ui.TEAMSUBSRCIBER_REFRESHSCHEDULE org.eclipse.team.ui.CTX_REFRESHSCHEDULE_ENABLED="false" org.eclipse.team.ui.CTX_REFRESHSCHEDULE_INTERVAL="3600" org.eclipse.team.ui.CTX_REFRESHSCHEDULE_RUNONCE="false"/>
+<resource_scope_roots resource_scope_root_resource="/RondofrioCommon"/>
+<resource_scope_roots resource_scope_root_resource="/RondofrioEE"/>
+<resource_scope_roots resource_scope_root_resource="/RondofrioEJB"/>
+<resource_scope_roots resource_scope_root_resource="/RondofrioWeb"/>
+</org.eclipse.team.ui.TEAMSUBSRCIBERSETTINGS>
+</data>
+</participant>
+</syncparticipants>

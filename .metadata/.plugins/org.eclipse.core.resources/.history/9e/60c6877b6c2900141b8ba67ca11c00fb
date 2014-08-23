@@ -1,0 +1,53 @@
+package pa.arquitetura;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public final class EmailUtil {
+
+	/**
+	 * http://www.guj.com.br/java/37019-expressao-regular-de-validacao-de-email
+	 */
+	public static  boolean validarEmail(String email) {
+
+		if(StringUtil.isNullOrEmpty(email)){
+			return false;
+		}
+		
+		String[] listaEmails = null;
+
+		// Verifica se existe uma lista e de email seprada por "," ou ";"
+		if (email.split(";").length > 1)
+			listaEmails = email.split(";");
+		else if (email.split(",").length > 1)
+			listaEmails = email.split(",");
+
+		// Valida todos emails separados por ";" ou ","
+		if (listaEmails != null) {
+			for (int i = 0; i < listaEmails.length; i++) {
+				Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,3}$");
+				Matcher m = p.matcher(listaEmails[i].trim());
+				if (!m.find())
+					return false;
+
+			}
+
+			// Valida o email sozinho
+		} else {
+			Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,3}$");
+			Matcher m = p.matcher(email.trim());
+			if (!m.find()) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	
+	
+	public static void main(String[] args) {
+		
+		System.out.println(validarEmail("thiago.busarello@datacoper.com.br;thiago.busarello@datacoper.com.br"));
+		
+	}
+}

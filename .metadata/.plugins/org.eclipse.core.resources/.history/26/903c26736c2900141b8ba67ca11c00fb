@@ -1,0 +1,21 @@
+package br.com.rondofrio.remote;
+
+import java.util.List;
+
+import javax.ejb.Local;
+
+import pa.arquitetura.CanConfirm;
+import pa.arquitetura.CanFind;
+import pa.arquitetura.CanList;
+import pa.arquitetura.IRemote;
+import br.com.rondofrio.common.CidadeParaListagem;
+import br.com.rondofrio.model.Cidade;
+
+@Local
+public interface CidadeRemote extends IRemote, CanFind<Cidade>, CanList<Cidade>, CanConfirm<Cidade>{
+	
+	public List<Cidade> listaDeCidadesPorDescricao(String descricao);
+	
+	public List<CidadeParaListagem> listaDeCidadesPorDescricaoListagem(String descricao);
+
+}

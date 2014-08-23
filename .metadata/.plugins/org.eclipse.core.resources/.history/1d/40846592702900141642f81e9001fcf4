@@ -1,0 +1,33 @@
+package controllers.tipoprocesso;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import lombok.Getter;
+import lombok.Setter;
+import br.com.pa.arquitetura.ControladorBasicoDeFormulario;
+import br.com.pa.model.TipoProcesso;
+import br.com.pa.remote.TipoProcessoRemote;
+
+@ManagedBean
+@ViewScoped
+@Getter
+@Setter
+public class TipoProcessoFormController extends
+		ControladorBasicoDeFormulario<TipoProcesso, TipoProcessoRemote> {
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected TipoProcesso criaNovoObjeto() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected TipoProcessoRemote servidor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

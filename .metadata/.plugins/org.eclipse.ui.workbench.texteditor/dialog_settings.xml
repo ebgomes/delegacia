@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="305" key="DIALOG_WIDTH"/>
+		<item value="142" key="DIALOG_Y_ORIGIN"/>
+		<item value="444" key="DIALOG_HEIGHT"/>
+		<item value="964" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="true" key="wrap"/>
+		<item value="false" key="isRegEx"/>
+		<item value="true" key="casesensitive"/>
+		<item value="true" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="Processo" key="selection"/>
+		<list key="findhistory">
+			<item value="Motivo"/>
+			<item value="TipoProcesso"/>
+			<item value="lis"/>
+			<item value="capaArquivo"/>
+			<item value="acoes_form2"/>
+			<item value="acoes"/>
+			<item value="4949"/>
+			<item value="login"/>
+		</list>
+		<list key="replacehistory">
+			<item value="Processo"/>
+			<item value="Situacao"/>
+			<item value="Motivo"/>
+			<item value="tipoProcesso"/>
+			<item value="acoes"/>
+			<item value="obj"/>
+			<item value="ordemDeServico"/>
+			<item value="ordemDeServicoForm"/>
+		</list>
+	</section>
+</section>

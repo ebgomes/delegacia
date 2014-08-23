@@ -1,0 +1,51 @@
+package br.com.arquitetura;
+
+import java.util.Calendar;
+import java.util.Date;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+public enum DiaDaSemana {
+
+    DOMINGO(Calendar.SUNDAY,false),
+    SEGUNDA_FEIRA(Calendar.MONDAY,true),
+    TERCA_FEIRA(Calendar.TUESDAY,true),
+    QUARTA_FEIRA(Calendar.WEDNESDAY,true),
+    QUINTA_FEIRA(Calendar.THURSDAY,true),
+    SEXTA_FEIRA(Calendar.FRIDAY,true),
+    SABADO(Calendar.SATURDAY,false);
+
+    public static final DiaDaSemana referente(int diaDaSemanaNoCalendar) {
+        for (DiaDaSemana dia : values()) {
+            if (dia.temOMesmoDiaNaSemanaQue(diaDaSemanaNoCalendar))
+                return dia;
+        }
+        throw new DiaDaSemana.Invalido();
+    }
+
+    public static final DiaDaSemana referente(Data data) {
+        return referente(data.getConteudo());
+    }
+
+    public static final DiaDaSemana referente(Date date) {
+        return referente(DateUtils.recuperaDiaDaSemana(date));
+    }
+
+    public static class Invalido extends RuntimeException {
+        private static final long serialVersionUID = 1L;
+    }
+
+    private final int     diaDaSemanaNoJavaUtilCalendar;
+
+    private final boolean ehUtil;
+
+    private boolean temOMesmoDiaNaSemanaQue(int diaDaSemanaNoJavaUtilCalendar) {
+        return this.diaDaSemanaNoJavaUtilCalendar == diaDaSemanaNoJavaUtilCalendar;
+    }
+
+    public boolean ehUtil() {
+        return this.ehUtil;
+    }
+
+}

@@ -1,0 +1,85 @@
+package filter;
+
+import javax.faces.application.NavigationHandler;
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseEvent;
+import javax.faces.event.PhaseId;
+import javax.faces.event.PhaseListener;
+import javax.servlet.http.HttpSession;
+
+import br.com.pa.arquitetura.ConfirmaQue;
+import br.com.rondofrio.model.Login;
+
+public class SecurityPhaseListener implements PhaseListener {
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void afterPhase(PhaseEvent event) {
+		FacesContext fc = event.getFacesContext();
+
+		String paginaAtual = fc.getViewRoot().getViewId();
+
+		boolean isLoginPage = paginaAtual.contains(EnumPaginaFiltro.LOGIN_PAGE
+				.getUrl());
+		boolean isErrorPage = paginaAtual.contains(EnumPaginaFiltro.ERROR_PAGE
+				.getUrl());
+
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(
+				true);
+
+		Login login = (Login) session.getAttribute("login");
+
+		boolean isUserNotLogedIn = hasNullObjects(new Object[] { login });
+
+		if (ConfirmaQue.ehNulo(login)) {
+			if (!isErrorPage && (!isLoginPage && isUserNotLogedIn)) {
+				NavigationHandler nh = fc.getApplication()
+						.getNavigationHandler();
+				nh.handleNavigation(fc, null, "/login?faces-redirect=true");
+
+			} else if (isLoginPage) {
+				if (!isUserNotLogedIn && isLoginPage) {
+					NavigationHandler nh = fc.getApplication()
+							.getNavigationHandler();
+					nh.handleNavigation(fc, null, "/index?faces-redirect=true");
+				}
+			}
+		}
+
+	}
+
+	@Override
+	public void beforePhase(PhaseEvent event) {
+		FacesContext fc = event.getFacesContext();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(
+				true);
+		if (session.getAttribute("tituloAplicacao") == null) {
+			FacesContext context = FacesContext.getCurrentInstance();
+			String tituloAplicacao = context.getExternalContext()
+					.getInitParameter("titulosistemaweb");
+			session.setAttribute("tituloAplicacao", tituloAplicacao);
+		}
+
+	}
+
+	@Override
+	public PhaseId getPhaseId() {
+		return PhaseId.RESTORE_VIEW;
+	}
+
+	private Boolean hasNullObjects(Object[] objetos) {
+
+		Boolean retorno = Boolean.FALSE;
+
+		for (Object object : objetos) {
+			if (object == null) {
+				retorno = true;
+				break;
+			}
+		}
+
+		return retorno;
+	}
+
+}

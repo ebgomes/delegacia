@@ -1,0 +1,44 @@
+package controllers.tipoprocesso;
+
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import org.primefaces.context.RequestContext;
+
+import br.com.pa.arquitetura.ConfirmaQue;
+import br.com.pa.arquitetura.ControladorBasicoDeFormulario;
+import br.com.pa.arquitetura.EntityState;
+import br.com.pa.model.Login;
+import br.com.pa.model.TipoProcesso;
+import br.com.pa.remote.LoginRemote;
+import br.com.pa.remote.TipoProcessoRemote;
+
+@ManagedBean
+@ViewScoped
+@Getter
+@Setter
+public class TipoProcessoFormController extends
+		ControladorBasicoDeFormulario<TipoProcesso, TipoProcessoRemote> {
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected TipoProcesso criaNovoObjeto() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected TipoProcessoRemote servidor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+}

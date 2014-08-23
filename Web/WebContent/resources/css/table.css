@@ -1,0 +1,238 @@
+/*
+    Document   : table
+    Created on : 16/03/2010, 09:49:26
+    Author     : Thiago Felipe Festa
+    Description:
+        Folha de estilo respons�vel pelas tabelas
+*/
+
+table.table {
+    background: #fff;
+    margin: auto;
+    width: 100%;
+    color: #4d4d4d;
+    text-align: left;
+    font-size: 12px;
+}
+
+table.table thead b {
+    display: block;
+    padding-bottom: 2px;
+    font-size: 14px;
+    color: #146eb4;
+    border-bottom: 5px solid #146eb4;
+    text-align: left;
+}
+
+table.table thead tr th {
+    font-weight: bold;
+    color: #146eb4;
+    padding: 3px;
+    text-align: left;
+}
+
+table.table thead tr th.header {
+    background-image: url(../images/table-bg.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center left;
+    padding-left: 20px;
+} 
+
+table.table thead tr th.headerSortUp {
+    background-image: url(../images/table-asc.gif);
+    background-color: #fafafa;
+}
+
+table.table thead tr th.headerSortDown {
+    background-image: url(../images/table-desc.gif);
+    background-color: #fafafa;
+}
+
+table.table tbody tr th {
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 5px solid #f1f8fe;
+}
+
+table.table tbody h1 {
+    margin: 0px;
+    padding: 20px 0px 2px 10px;
+    color: #146eb4;
+    font-size: 14px;
+    text-align: left;
+    font-weight: normal;
+}
+
+table.table tbody tr.highlight td {
+    background: #f2f9fe;
+}
+
+table.table tbody tr td {
+    padding: 0px 3px;
+    font-size: 12px;
+    color: #4d4d4d;
+    height: 27px;
+    line-height: 27px;
+}
+
+table.table tbody tr td div.button {
+    top: 5px;
+    line-height: 19px;
+}
+
+table.table tbody tr td a {
+    color: #000;
+    text-decoration: none;
+}
+
+table.table tbody tr td a:hover {
+    text-decoration: underline;
+}
+
+/* ESTILIZAÇÃO DAS TABLES */
+.yui-skin-sam .yui-dt table {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #4D4D4D;
+    font-size: 12px !important;
+    margin: auto !important;
+    text-align: left;
+    width: 100%;
+    border: none !important;
+    border-collapse: collapse !important;
+    font-family: Verdana !important;
+}
+
+.yui-skin-sam .yui-dt tr.yui-dt-first td {
+    border-top: none !important;
+}
+
+.yui-skin-sam .yui-dt td {
+    border-width: 0px !important;
+}
+
+.yui-skin-sam .yui-dt th {
+    background: none !important;
+    border-width: 0px !important;
+    color: #146EB4 !important;
+    font-weight: bold !important;
+    padding: 3px 0 !important;
+    text-align: left !important;
+    border-bottom: 5px solid #146EB4 !important;
+}
+
+.yui-skin-sam .yui-pg-container {
+    text-align: center;
+    height: 45px;
+    padding-top: 10px;
+    color: #146EB4;
+}
+
+.yui-skin-sam .yui-pg-first,
+.yui-skin-sam .yui-pg-previous,
+.yui-skin-sam .yui-pg-next,
+.yui-skin-sam .yui-pg-last,
+.yui-skin-sam .yui-pg-current,
+.yui-skin-sam .yui-pg-pages,
+.yui-skin-sam .yui-pg-page  {
+    font-family: Verdana !important;
+    text-decoration: none !important;
+}
+
+.yui-skin-sam .yui-dt-liner
+{
+    padding:4px 5px 4px 10px !important;
+}
+
+.yui-dt-hd, .yui-dt-bd, .yui-dt-scrollable
+{
+    border: 0px !important;
+}
+
+.ui-widget-content .ui-datatable thead th, .ui-datatable thead th
+{
+	background: #E0EEEE;
+	color: #146EB4;
+	border: 1px solid;
+	border-bottom: 1px solid;
+	font-weight: bold;
+}
+
+.ui-datatable .ui-datatable-data td, .ui-datatable .ui-datatable-data-empty td {
+	border: none !important;
+	word-wrap: break-word;
+}
+
+.ui-datatable-data .ui-widget-content
+{
+	border: 0;	
+}
+
+.ui-datatable .ui-widget-header
+{
+	background: none !important;
+	border: 0 !important;	
+}
+
+.ui-widget-content.ui-datatable-odd
+{
+	background: #EEEEE0;
+}
+
+.ui-paginator .ui-corner-all {
+	-moz-border-radius: 0 /*{cornerRadius}*/; 
+	-webkit-border-radius: 0 /*{cornerRadius}*/; 
+	border-radius: 0 /*{cornerRadius}*/; 
+}
+
+.ui-datatable th, .ui-datatable tfoot td  
+{
+	text-align: left !important;	
+}
+
+.ui-datatable .ui-state-highlight
+{
+	background: #607B8B !important;	
+	color: #FFFFFF;
+}
+
+.ui-datatable .ui-selected
+{
+	background: #426FD9 !important;	
+	margin: 0px;
+}
+
+.scrollableTable
+{
+	overflow: auto;	
+}
+
+.scrollableTable .ui-datatable-scrollable-body
+{
+	overflow: visible;	
+}
+
+.scrollableTable, .scrollableTable table
+{
+	width: 100% !important;
+}
+
+.scrollableTable table
+{
+ 	table-layout: fixed;
+}
+
+.ui-datatable .ui-widget-content a
+{
+	color: #3b9805 !important;
+}
+
+.scrollableTable .ui-widget-content a
+{
+   color: #3b9805 !important;
+}
+
+.ui-datatable-data-empty .ui-widget-content
+{
+	border: none;
+}

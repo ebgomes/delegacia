@@ -1,0 +1,41 @@
+/*
+package br.com.arquitetura;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+
+@Stateless
+@LocalBean
+public class QueryControllerEJB {
+
+	public <B extends Serializable> List<B> getBeanList(String sql, Class<B> beanClass, Object... param) {
+		try {
+			ResultSetHandler<List<B>> handler = new BeanListHandler<B>(beanClass);
+
+			String consulta = getWhereClause(sql);
+			Object[] parametros = getParametros(param);
+
+			List<B> list = queryRunner(consulta, handler, parametros);
+
+			// LOGGER.info(list.size()+" registro(s) retornado(s)");
+
+			return list;
+
+		} catch (Exception ex) {
+			throw new Exception();
+		}
+	}
+	
+	private String getWhereClause(String consulta) {
+		return beanConsultaGroup != null ? beanConsultaGroup.getSQL(consulta, isOracle) : consulta;
+	}
+
+	
+}
+*/

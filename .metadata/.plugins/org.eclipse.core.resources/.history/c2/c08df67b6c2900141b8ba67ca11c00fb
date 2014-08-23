@@ -1,0 +1,97 @@
+package pa.arquitetura;
+
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
+import java.text.Normalizer;
+
+public class StringUtil {
+
+	public static boolean isNullOrEmpty(Object str) {
+		return str == null || str.toString().length() == 0;
+	}
+
+	public static boolean isNullOrEmpty(String str) {
+		return str == null || str.length() == 0;
+	}
+
+	public static void validateNotNull(Object value, String name) {
+		if (value == null) {
+			throw new NullPointerException(name + " não pode ser nulo.");
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public static  boolean isEquals(Object newValue, Object oldValue) {
+
+		if (newValue == null && oldValue == null) {
+			return true;
+		}
+
+		if (newValue != null && oldValue != null) {
+			if (newValue instanceof Comparable) {
+				return ((Comparable<Object>) newValue).compareTo(oldValue) == 0;
+			} else {
+				return newValue.equals(oldValue);
+			}
+		}
+
+		// um eh nullo e o outro nao
+		return false;
+	}
+	
+	public static String toString(Object value){
+		return value != null ? value.toString() : null;
+	}
+	
+	public static boolean isNumeric(String str) {
+	    if (isNullOrEmpty(str)) {
+	        return false;
+	    }
+	    try {
+	      Double.parseDouble(str);
+	      return true;
+	    } catch (NumberFormatException e) {
+	      return false;
+	    }
+	  }
+	
+	public static String convertByteArrayToString(byte[] arrayByte){
+		 Charset cset = Charset.forName("ISO-8859-1");
+
+		 ByteBuffer bbuf = ByteBuffer.wrap(arrayByte, 0, arrayByte.length);
+		 CharBuffer cbuf = cset.decode(bbuf);
+		 return cbuf.toString();
+	}
+
+	public static String reduzir(String valor, int tamanhoMaximo)
+	{
+		String retorno = null;
+		
+		if (valor != null)
+		{
+			if (valor.length() > (tamanhoMaximo - 1))
+			{
+				retorno = valor.substring(0, (tamanhoMaximo - 1));
+			} else
+			{
+				retorno = valor;
+			}
+		}
+		
+		return retorno;
+	}
+	
+	public static String normalize(String dados){
+		dados = Normalizer.normalize(dados, Normalizer.Form.NFD);
+		dados = dados.replaceAll("[^\\p{ASCII}]", "");
+		return dados;
+	}
+	
+	/*
+	 * remove acentos e caracterer invalidos
+	 */
+	public String removerCaractersInvalidos(String dados){
+		return normalize(dados);
+	}
+}

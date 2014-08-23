@@ -1,0 +1,67 @@
+package pa.arquitetura;
+
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
+public final class BeanUtil implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public static <E extends AbstractEntity> E beanCopy(E from, E to) {		
+		
+		if(from == null)return null;
+		if(to == null){
+			to = createInstance(from);
+		}
+		for (Field field : from.getClass().getDeclaredFields()) {
+			try {
+				if(!Modifier.isFinal(field.getModifiers())){					
+					field.setAccessible(true);
+					field.set(to, field.get(from));
+				}
+			} catch (Exception e) {							
+				throw new RuntimeException("Não foi possível copiar o atributo (" + 
+						field.getName() + ") da entidade (" + from + ") para a entidade (" + to+ ")", e);
+			}
+		}
+		return to;
+		
+	}
+	
+	@SuppressWarnings("unchecked")	
+	public static final <C > C createInstance(C obj){
+		StringUtil.validateNotNull(obj, "Objeto");
+		return (C) createInstance(obj.getClass());	
+	}
+	
+	public static final <C> C createInstance(Class<C> clazz){
+		StringUtil.validateNotNull(clazz, "Objeto");
+		try{
+			return clazz.newInstance();			
+		}catch (Exception e) {
+			throw new RuntimeException("Erro ao criar nova instancia para o Objeto "+clazz,e);
+		}		
+	}			
+
+	public static Object getNestedAttributeValue(Object bean, String nestedProperty) throws Exception {
+		Object newBean = bean;
+		String[] fieldNames = nestedProperty.split("\\.");
+		for (String fieldName : fieldNames) {
+			Field field = newBean.getClass().getDeclaredField(fieldName);
+			field.setAccessible(true);
+			newBean = field.get(newBean);
+			if (newBean == null) {
+				return null;
+			}
+		}
+		return newBean;
+	}	
+
+	public static String getSimpeName(Object obj){
+		return obj != null ? obj.getClass().getSimpleName() : "null";
+	}		
+}

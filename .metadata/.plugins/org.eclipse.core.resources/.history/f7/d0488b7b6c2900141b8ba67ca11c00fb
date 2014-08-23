@@ -1,0 +1,7 @@
+package pa.arquitetura;
+
+public interface IsCloneable<T> extends Cloneable {
+
+    T clone();
+
+}

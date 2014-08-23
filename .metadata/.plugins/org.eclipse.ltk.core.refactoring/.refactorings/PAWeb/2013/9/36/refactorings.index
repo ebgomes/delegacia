@@ -1,0 +1,15 @@
+1378081764309	Rename package 'estoque'
+1378081808179	Copy files
+1378082009969	Copy compilation unit
+1378082022917	Rename type 'FaturamentoListController'
+1378082094401	Copy compilation unit
+1378082994260	Rename field 'faturamento'
+1378083019943	Copy compilation unit
+1378083030339	Rename type 'CidadeFormController'
+1378083063316	Rename field 'cidade'
+1378555648367	Rename package 'controller.estoque'
+1378555723863	Rename package 'controllers.estoque'
+1378555734244	Rename type 'EstoqueFormController'
+1378555741397	Rename type 'EstoqueListController'
+1378555756253	Rename resource 'estoque'
+1378642130101	Delete element

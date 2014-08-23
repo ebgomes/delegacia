@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" 
+		  xmlns:h="http://java.sun.com/jsf/html" 
+		  xmlns:ui="http://java.sun.com/jsf/facelets" 
+		  xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:p="http://primefaces.org/ui" xmlns:dc="http://java.sun.com/jsf/composite/component">
+<ui:composition template="/template.xhtml">
+	<ui:define name="breadcrumb">
+		<h:link value="Início" outcome="/index" />
+		<h:outputText value=" &raquo; " />
+		<span><h:outputText value="Tipo de Documento" /> </span>
+	</ui:define>
+	<ui:define name="conteudo">
+
+		<p:growl id="msgs" />
+
+		<h1> Tipo de Documento </h1>
+
+		<br />
+		<h:panelGrid columns="2">
+			<h:form id="acoes_form2" prependId="false">
+				<h:commandButton value="Novo" action="#{tipoDeDocumentoFormController.novo}" styleClass="button button-blue-green" />
+			</h:form>
+		</h:panelGrid>
+
+		<h:form id="form_objetos" prependId="false">
+			<!--   <p:dataTable id="dt_objetos" widgetVar="wdt_objetos" value="#{tipoDeDocumentoListController.lista}" var="objeto" emptyMessage="Nenhum registro encontrado !" paginator="true" rows="15"> -->
+			<p:dataTable id="dt_objetos" widgetVar="wdt_objetos" value="#{tipoDeDocumentoListController.getLista()}" var="objeto" emptyMessage="Nenhum registro encontrado !" paginator="true" paginatorPosition="bottom" rows="15">
+				<p:column headerText="Código">
+					<h:outputText value="#{objeto.id}" />
+				</p:column>
+				<p:column headerText="Descrição">
+					<h:outputText value="#{objeto.descricao}" />
+				</p:column>			
+				<p:column headerText="Ações">
+					<h:commandLink value="Editar" action="#{tipoDeDocumentoFormController.edita(objeto)}" />
+					<h:outputLabel value=" " />
+					<h:commandLink value="Remover" action="#{tipoDeDocumentoFormController.remove(objeto)}" onclick="return confirm('Deseja realmente excluir?')" />
+					<h:outputLabel value=" " />
+					<h:commandLink value="Consultar" action="#{tipoDeDocumentoFormController.consulta(objeto)}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

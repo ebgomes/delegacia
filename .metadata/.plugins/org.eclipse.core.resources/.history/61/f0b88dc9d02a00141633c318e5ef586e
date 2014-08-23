@@ -1,0 +1,15 @@
+package br.com.pa.remote;
+
+import javax.ejb.Local;
+
+import br.com.pa.arquitetura.CanConfirm;
+import br.com.pa.arquitetura.CanFind;
+import br.com.pa.arquitetura.CanList;
+import br.com.pa.arquitetura.IRemote;
+import br.com.pa.model.Processo;
+
+@Local
+public interface SituacaoRemote extends IRemote, CanFind<Processo>,
+		CanConfirm<Processo>, CanList<Processo> {
+
+}

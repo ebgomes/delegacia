@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" 
+		  xmlns:h="http://java.sun.com/jsf/html" 
+		  xmlns:ui="http://java.sun.com/jsf/facelets" 
+		  xmlns:f="http://java.sun.com/jsf/core"
+		  xmlns:p="http://primefaces.org/ui" xmlns:dc="http://java.sun.com/jsf/composite/component">
+<ui:composition template="/template.xhtml">
+	<ui:define name="breadcrumb">
+		<h:link value="Início" outcome="/index" />
+		<h:outputText value=" &raquo; " />
+		<span><h:outputText value="Faturamento" /> </span>
+	</ui:define>
+	<ui:define name="conteudo">
+
+		<p:growl id="msgs" />
+
+		<h1> Faturamento </h1>
+
+		<br />  
+		<h:panelGrid columns="2">
+			<h:form id="acoes_form2" prependId="false">
+				<h:commandButton value="Novo Faturamento" action="#{faturamentoFormController.novo}" styleClass="button button-blue-green" />
+			</h:form>
+		</h:panelGrid>
+
+		<h:form id="form_objetos" prependId="false">
+			<!--   <p:dataTable id="dt_objetos" widgetVar="wdt_objetos" value="#{faturamentoListController.lista}" var="objeto" emptyMessage="Nenhum registro encontrado !" paginator="true" rows="15"> -->
+			<p:dataTable id="dt_objetos" widgetVar="wdt_objetos" value="#{faturamentoListController.getLista()}" var="objeto" emptyMessage="Nenhum registro encontrado !" paginator="true" paginatorPosition="bottom" rows="100">
+				<p:column headerText="Código">
+					<h:outputText value="#{objeto.id}" />
+				</p:column> 
+				<p:column headerText="Numero Documento" filterBy="#{objeto.numeroDocumento}">
+					<h:outputText value="#{objeto.numeroDocumento}" /> 
+				</p:column>			
+				<p:column headerText="Data Movimento" filterBy="#{objeto.dataMovimento}"> 
+					<h:outputText value="#{objeto.dataMovimento.noFormato('dd/MM/yyyy')}" /> 
+				</p:column>
+				<p:column headerText="Parceiro Comercial" filterBy="#{objeto.parceiro.nome}"> 
+					<h:outputText value="#{objeto.parceiro.nome}"  />
+				</p:column> 
+				<p:column headerText="Tipo Mvto">
+					<h:outputText value="#{objeto.tipoDeDocumento.descricao}" />
+				</p:column>
+				<p:column headerText="Tipo Mvto">
+					<h:outputText value="#{objeto.tipoDeMovimento.descricao}" />
+				</p:column>				
+				<p:column headerText="Ações">
+					<h:commandLink value="Editar" action="#{faturamentoFormController.edita(objeto)}" />
+					<h:outputLabel value=" " />
+					<h:commandLink value="Remover" action="#{faturamentoFormController.remove(objeto)}" onclick="return confirm('Deseja realmente excluir?')" />
+					<h:outputLabel value=" " />
+					<h:commandLink value="Consultar" action="#{faturamentoFormController.consulta(objeto)}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

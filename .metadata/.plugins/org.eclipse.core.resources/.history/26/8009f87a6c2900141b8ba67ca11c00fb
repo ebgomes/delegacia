@@ -1,0 +1,16 @@
+package br.com.rondofrio.remote;
+
+import javax.ejb.Local;
+
+import pa.arquitetura.CanConfirm;
+import pa.arquitetura.CanFind;
+import pa.arquitetura.CanList;
+import pa.arquitetura.IRemote;
+import br.com.rondofrio.model.Material;
+
+@Local
+public interface MaterialRemote extends IRemote, CanFind<Material>, CanConfirm<Material>, CanList<Material> {
+
+	
+	
+}

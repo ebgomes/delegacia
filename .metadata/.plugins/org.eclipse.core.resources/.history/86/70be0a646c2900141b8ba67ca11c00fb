@@ -1,0 +1,28 @@
+package br.com.rondofrio.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import lombok.Getter;
+import lombok.Setter;
+import br.com.rondofrio.arquitetura.AbstractEntity;
+import br.com.rondofrio.arquitetura.Identifiable;
+
+@Entity
+@Getter
+@Setter
+public class Login extends AbstractEntity implements Identifiable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue
+	private Long id;
+
+	private String usuario;
+
+	private String senha;
+
+	private String nomeDoUsuario;
+}

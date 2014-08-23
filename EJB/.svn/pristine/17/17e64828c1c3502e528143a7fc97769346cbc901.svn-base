@@ -1,0 +1,75 @@
+package br.com.arquitetura;
+
+import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+
+public final class StringUtils {
+
+    public static boolean peloMenosParteDaPalavraEstaEmUmaDasPalavrasDaLista(final String descricao, final Collection<String> descricoes) {
+        if (descricao == null || descricao.isEmpty() || CollectionUtils.isNullOrEmpty(descricoes)) {
+            return false;
+        }
+        for (String atual : descricoes) {
+            if (descricao.toUpperCase().contains(atual.toUpperCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+    public static boolean peloMenosParteDaPalavraEstaEmUmaDasPalavrasDaLista(final String descricao, final String... lista) {
+        return peloMenosParteDaPalavraEstaEmUmaDasPalavrasDaLista(descricao, asList(lista));
+    }
+    */
+
+    public static boolean isNullOrEmpty(final String value) {
+        return value == null || value.isEmpty();
+    }
+
+    private StringUtils() {
+    }
+
+    public static final String concatena(String separador, Object... objects) {
+        StringBuilder concatenada = new StringBuilder();
+        for (int i = 0; i < objects.length; i++) {
+            if (ConfirmaQue.naoEhNulo(objects[i])) {
+                concatenada.append(objects[i]);
+                if (i < (objects.length - 1)) {
+                    concatenada.append(separador);
+                }
+            }
+        }
+        return concatenada.toString();
+    }
+
+    public static final String semAcentos(String fonte) {
+        if (fonte == null){
+            return null;
+        }
+        String aMesmaStringSemAcentos = Normalizer.normalize(fonte, Normalizer.Form.NFD);
+        aMesmaStringSemAcentos = aMesmaStringSemAcentos.replaceAll("[^\\p{ASCII}]", "");
+        return aMesmaStringSemAcentos;
+    }
+
+    public static final List<String> removerRepetidos(List<String> listaEntrada){
+        String[] array = new String[listaEntrada.size()];
+        List<String> listaSaida = new ArrayList<String>();
+        int i = 0;
+        for (String string : listaEntrada) {
+           array[i] = string;
+           i = i + 1;
+        }
+
+        array = new HashSet<String>(Arrays.asList(array)).toArray(new String[0]);// retira os repetidos
+        for (String string : array) {
+           listaSaida.add(string);
+        }
+        return listaSaida;
+    }
+
+}

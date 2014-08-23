@@ -1,0 +1,22 @@
+package br.com.rondofrio.model;
+
+import src.br.com.rondofrio.arquitetura.AbstractEntity;
+import src.br.com.rondofrio.arquitetura.Identifiable;
+
+@Entity
+@Getter
+@Setter
+public class Login extends AbstractEntity implements Identifiable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue
+	private Long id;
+
+	private String usuario;
+
+	private String senha;
+
+	private String nomeDoUsuario;
+}

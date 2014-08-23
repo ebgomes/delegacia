@@ -1,0 +1,59 @@
+.wijmo-wijmenu.ui-corner-all, .wijmo-wijmenu .ui-corner-all {
+	-moz-border-radius: 0 !important/*{cornerRadius}*/; 
+	-webkit-border-radius: 0 !important/*{cornerRadius}*/; 
+	border-radius: 0 !important/*{cornerRadius}*/; 
+}
+
+.wijmo-wijmenu .wijmo-wijmenu-link {
+	padding: 0 !important;	
+}
+
+.wijmo-wijmenu-horizontal .wijmo-wijmenu-link {
+	padding: 0 !important;	
+}
+
+.wijmo-wijmenu-horizontal.ui-widget-content
+{
+	background: url("../../javax.faces.resource/themes/sam/images/sprite.png.xhtml?ln=primefaces&amp;v=2.2.1") repeat-x scroll 0 -200px #D8D8D8;
+}
+
+.wijmo-wijmenu-link.ui-state-active
+{
+	background: none !important;	
+}
+
+.wijmo-wijmenu .wijmo-wijmenu-parent .wijmo-wijmenu-child {
+	width : 30% !important;
+    white-space: nowrap !important;
+}
+
+.wijmo-wijmenu-horizontal .wijmo-wijmenu-child .wijmo-wijmenu-link {
+	width : 100% !important;
+}
+
+.wijmo-wijmenu .wijmo-wijmenu-item .wijmo-wijmenu-text, .wijmo-wijmenu-horizontal .wijmo-wijmenu-parent .ui-icon, .wij-menu-breadcrumb a, .wij-menu-breadcrumb span, .wij-menu-breadcrumb .wij-menu-prev-list a .ui-icon {
+    color: #000000;
+    float: left;
+}
+
+.wijmo-wijmenu .wijmo-wijmenu-list .wijmo-wijmenu-item{
+	border: 0px !important;	
+}
+
+.wijmo-wijmenu .wijmo-wijmenu-list .wijmo-wijmenu-item:HOVER {
+	border: 0px !important;	
+}
+
+.wijmo-wijmenu .wijmo-wijmenu-list .wijmo-wijmenu-item:FOCUS {
+	border: 0px !important;	
+}
+
+.wijmo-wijmenu-list.ui-widget-content
+{
+	border: 1px solid #AAAAAA !important;	
+}
+
+.wijmo-wijmenu-list .wijmo-wijmenu-item.wijmo-wijmenu-parent
+{
+	position: static;	
+}

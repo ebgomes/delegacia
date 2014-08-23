@@ -1,0 +1,131 @@
+/*
+    Document   : button
+    Created on : 16/03/2010, 09:49:26
+    Author     : Thiago Felipe Festa
+    Description:
+        Folha de estilo respons�vel pelos bot�es
+*/
+
+div.button {
+    position: relative;
+    display: inline-block;
+    /*float: left;*/
+    height: 21px;
+    /*margin-top: 5px;*/
+}
+
+div.button.button-spacer {
+    margin-right: 5px;
+}
+
+div.button span.corner {
+    position: absolute;
+    display: block;
+    width: 5px;
+    height: 5px;
+    overflow: hidden;
+    background: url("../images/corners.png") no-repeat;
+    z-index: 99;
+}
+
+div.button span.corner.corner-1 { top: 0px; left: 0px; background-position: 0px 0px; }
+div.button span.corner.corner-2 { top: 0px; right: 0px; background-position: -5px 0px; }
+div.button span.corner.corner-3 { bottom: 0px; right: 0px; background-position: -15px 0px; }
+div.button span.corner.corner-4 { bottom: 0px; left: 0px; background-position: -10px 0px; }
+
+a.button,
+input.button {
+    display: inline-block;
+    height: 21px;
+    line-height: 21px;
+    padding: 0px 10px;
+    font-size: 10px !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    font-weight: bold;
+    background-repeat: repeat-x;
+    border-radius: 5px;
+   	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+}
+
+input.button {
+    border: 0px;
+    font-size: 10px;
+    font-family: Verdana, "Bitstream Vera Sans", "DejaVu Sans", "Liberation Sans", Geneva, sans-serif;
+    cursor: pointer;
+    /*position: absolute;*/
+    left: 0px;
+    z-index: 9;
+    padding: 0 10px 4px;
+}
+
+
+/* Cores dos bot�es */
+a.button.button-blue,
+input.button.button-blue,
+button.button.button-blue {
+    background-image: url("../images/bg-button-blue.gif");
+    background-color: #1e8adc;
+}
+
+a.button.button-green,
+input.button.button-green,
+button.button.button-green {
+    background-image: url("../images/bg-button-green.gif");
+    background-color: #53bc16;
+}
+
+a.button.button-gray,
+input.button.button-gray,
+button.button.button-gray {
+    background-image: url("../images/bg-button-gray.gif");
+    background-color: #959494;
+}
+
+a.button.button-blue-green,
+input.button.button-blue-green,
+button.button.button-blue-green{
+    background-image: url("../images/bg-button-blue.gif");
+    background-color: #1e8adc;
+}
+a.button.button-blue-green:hover,
+input.button.button-blue-green:hover,
+button.button.button-blue-green:hover {
+    background-image: url("../images/bg-button-green.gif");
+    background-color: #53bc16;
+}
+
+
+a.button.button-red,
+input.button.button-red,
+button.button.button-red{
+    background-image: url("../images/bg-button-blue.gif");
+    background-color: red;
+}
+a.button.button-red:hover,
+input.button.button-red:hover,
+button.button.button-red:hover {
+    background-image: url("../images/bg-button-green.gif");
+    background-color: red;
+}
+
+.ui-button {
+    display: inline-block;
+    height: 31px;
+    line-height: 31px;
+    padding: 0 !important;
+    font-size: 12px !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    font-weight: bold;
+    background-repeat: repeat-x;	
+    background-image: url("../images/bg-button-blue.gif");
+    background-color: #1e8adc;
+    border: 0px;
+    font-size: 10px;
+    font-family: Calibri, "Bitstream Vera Sans", "DejaVu Sans", "Liberation Sans", Geneva, sans-serif;
+    cursor: pointer;
+    left: 0px;
+    z-index: 9;
+}

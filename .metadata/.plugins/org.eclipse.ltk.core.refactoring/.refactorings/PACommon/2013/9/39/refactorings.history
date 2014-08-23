@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;descontado&apos; in &apos;br.com.rondofrio.model.ItemOrdemDeServico&apos; to &apos;utilizado&apos;&#x0D;&#x0A;- Original project: &apos;RondofrioCommon&apos;&#x0D;&#x0A;- Original element: &apos;br.com.rondofrio.model.ItemOrdemDeServico.descontado&apos;&#x0D;&#x0A;- Renamed element: &apos;br.com.rondofrio.model.ItemOrdemDeServico.utilizado&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;descontado&apos;" flags="589826" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;br.com.rondofrio.model{ItemOrdemDeServico.java[ItemOrdemDeServico^descontado" name="utilizado" references="true" setter="false" stamp="1380399130404" textual="false" version="1.0"/>
+</session>

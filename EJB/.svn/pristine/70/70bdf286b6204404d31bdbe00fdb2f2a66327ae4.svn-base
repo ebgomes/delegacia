@@ -1,0 +1,422 @@
+package br.com.arquitetura;
+
+import java.util.Calendar;
+
+import javax.resource.NotSupportedException;
+
+public enum CamposDaData {
+
+    // campos no plural existem só para facilitar na leitura do código
+    ANO {
+        @Override
+        public Integer recupera(final Data atual) {
+            return DateUtils.recuperaAno(atual.getConteudo());
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return new Data(DateUtils.somaAnos(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Data subtrai(final Data atual, final Number valor) {
+            return new Data(DateUtils.subtraiAnos(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return ConfirmaQue.ehNulo(valor) ? null : 12 * MESES.emMiliSegundos(valor);
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return new Data(DateUtils.trocaOAno(atual.getConteudo(), valor));
+        }
+    },
+    ANOS {
+        @Override
+        public Integer recupera(final Data atual) {
+            return ANO.recupera(atual);
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return ANO.soma(atual, valor);
+        }
+
+        @Override
+        public Data subtrai(final Data data, final Number valor) {
+            return ANO.subtrai(data, valor);
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return ANO.emMiliSegundos(valor);
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return ANO.troca(atual, valor);
+        }
+    },
+    MES {
+        @Override
+        public Integer recupera(final Data atual) {
+            return DateUtils.recuperaMes(atual.getConteudo()) + 1;
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return new Data(DateUtils.somaMeses(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Data subtrai(final Data atual, final Number valor) {
+            return new Data(DateUtils.subtraiMeses(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return ConfirmaQue.ehNulo(valor) ? null : 30 * DIAS.emMiliSegundos(valor);
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return new Data(DateUtils.trocaOMes(atual.getConteudo(), valor - 1));
+        }
+    },
+    MESES {
+        @Override
+        public Integer recupera(final Data atual) {
+            return MES.recupera(atual);
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return MES.soma(atual, valor);
+        }
+
+        @Override
+        public Data subtrai(final Data atual, final Number valor) {
+            return MES.subtrai(atual, valor);
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return MES.emMiliSegundos(valor);
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return MES.troca(atual, valor);
+        }
+    },
+    DIA {
+        @Override
+        public Integer recupera(final Data atual) {
+            return DateUtils.recuperaDia(atual.getConteudo());
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return new Data(DateUtils.somaDiasNoMes(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Data subtrai(final Data atual, final Number valor) {
+            return new Data(DateUtils.subtraiDiasNoMes(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return ConfirmaQue.ehNulo(valor) ? null : 24 * HORAS.emMiliSegundos(valor);
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return new Data(DateUtils.trocaODiaDoMes(atual.getConteudo(), valor));
+        }
+    },
+    DIAS {
+        @Override
+        public Integer recupera(final Data atual) {
+            return DIA.recupera(atual);
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return DIA.soma(atual, valor);
+        }
+
+        @Override
+        public Data subtrai(final Data data, final Number valor) {
+            return DIA.subtrai(data, valor);
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return DIA.emMiliSegundos(valor);
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return DIA.troca(atual, valor);
+        }
+    },
+    HORA {
+        @Override
+        public Integer recupera(final Data atual) {
+            return DateUtils.recuperaHora(atual.getConteudo());
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return new Data(DateUtils.somaHoras(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Data subtrai(final Data atual, final Number valor) {
+            return new Data(DateUtils.subtraiHoras(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return ConfirmaQue.ehNulo(valor) ? null : 60 * MINUTOS.emMiliSegundos(valor);
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return new Data(DateUtils.trocaAHora(atual.getConteudo(), valor));
+        }
+
+    },
+    HORAS {
+        @Override
+        public Integer recupera(final Data atual) {
+            return HORA.recupera(atual);
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return HORA.soma(atual, valor);
+        }
+
+        @Override
+        public Data subtrai(final Data atual, final Number valor) {
+            return HORA.subtrai(atual, valor);
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return HORA.emMiliSegundos(valor);
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return HORA.troca(atual, valor);
+        }
+
+    },
+    MINUTO {
+        @Override
+        public Integer recupera(final Data atual) {
+            return DateUtils.recuperaMinuto(atual.getConteudo());
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return new Data(DateUtils.somaMinutos(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Data subtrai(final Data atual, final Number valor) {
+            return new Data(DateUtils.subtraiMinutos(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return ConfirmaQue.ehNulo(valor) ? null : 60 * SEGUNDOS.emMiliSegundos(valor);
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return new Data(DateUtils.trocaOMinuto(atual.getConteudo(), valor));
+        }
+    },
+    MINUTOS {
+        @Override
+        public Integer recupera(final Data atual) {
+            return MINUTO.recupera(atual);
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return MINUTO.soma(atual, valor);
+        }
+
+        @Override
+        public Data subtrai(final Data atual, final Number valor) {
+            return MINUTO.subtrai(atual, valor);
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return MINUTO.emMiliSegundos(valor);
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return MINUTO.troca(atual, valor);
+        }
+
+    },
+    SEGUNDO {
+        @Override
+        public Integer recupera(final Data atual) {
+            return DateUtils.recuperaSegundo(atual.getConteudo());
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return new Data(DateUtils.somaSegundos(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Data subtrai(final Data atual, final Number valor) {
+            return new Data(DateUtils.subtraiSegundos(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return ConfirmaQue.ehNulo(valor) ? null : valor * 1000;
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return new Data(DateUtils.trocaOSegundo(atual.getConteudo(), valor));
+        }
+    },
+    SEGUNDOS {
+        @Override
+        public Integer recupera(final Data atual) {
+            return SEGUNDO.recupera(atual);
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return SEGUNDO.soma(atual, valor);
+        }
+
+        @Override
+        public Data subtrai(final Data atual, final Number valor) {
+            return SEGUNDO.subtrai(atual, valor);
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return SEGUNDO.emMiliSegundos(valor);
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return SEGUNDO.troca(atual, valor);
+        }
+    },
+    MILISEGUNDO {
+        @Override
+        public Integer recupera(final Data atual) {
+            return DateUtils.recuperaMilisegundo(atual.getConteudo());
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return new Data(DateUtils.somaMilisegundos(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Data subtrai(final Data atual, final Number valor) {
+            return new Data(DateUtils.subtraiMilisegundos(atual.getConteudo(), valor.intValue()));
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return valor;
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return new Data(DateUtils.trocaOMiliSegundo(atual.getConteudo(), valor));
+        }
+
+    },
+    MILISEGUNDOS {
+        @Override
+        public Integer recupera(final Data atual) {
+            return MILISEGUNDO.recupera(atual);
+        }
+
+        @Override
+        public Data soma(final Data atual, final Number valor) {
+            return MILISEGUNDO.soma(atual, valor);
+        }
+
+        @Override
+        public Data subtrai(final Data atual, final Number valor) {
+            return MILISEGUNDO.subtrai(atual, valor);
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            return MILISEGUNDO.emMiliSegundos(valor);
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return MILISEGUNDO.troca(atual, valor);
+        }
+
+    },
+    PERIODO {
+        @Override
+        Integer recupera(Data atual) {
+            return DateUtils.get(atual.getConteudo(), Calendar.AM_PM);
+        }
+
+        @Override
+        Data soma(Data atual, Number valor) {
+            throw new RuntimeException(new NotSupportedException("Nao eh possível somar periodos!"));
+        }
+
+        @Override
+        Data subtrai(Data atual, Number valor) {
+            throw new RuntimeException(new NotSupportedException("Nao eh possível subtrair periodos!"));
+        }
+
+        @Override
+        public Integer emMiliSegundos(Integer valor) {
+            throw new RuntimeException(new NotSupportedException("Nao eh possível converter periodos em milisegundos!"));
+        }
+
+        @Override
+        public Data troca(Data atual, Integer valor) {
+            return new Data(DateUtils.trocaOPeriodo(atual.getConteudo(), valor));
+        }
+    };
+
+    abstract Integer recupera(Data atual);
+
+    abstract Data soma(Data atual, Number valor);
+
+    abstract Data subtrai(Data atual, Number valor);
+
+    /**
+     * Converte o valor milisegundos
+     * 
+     * @param valor
+     * @return
+     */
+    public abstract Integer emMiliSegundos(Integer valor);
+
+    public abstract Data troca(Data atual, Integer valor);
+
+}

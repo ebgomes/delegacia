@@ -1,0 +1,14 @@
+package br.com.rondofrio.remote;
+
+import javax.ejb.Local;
+
+import pa.arquitetura.CanConfirm;
+import pa.arquitetura.CanFind;
+import pa.arquitetura.CanList;
+import pa.arquitetura.IRemote;
+import br.com.rondofrio.model.Login;
+
+@Local
+public interface LoginRemote extends IRemote, CanFind<Login>, CanConfirm<Login>, CanList<Login>{
+	Login buscaPorUsuario(String usuario);
+}

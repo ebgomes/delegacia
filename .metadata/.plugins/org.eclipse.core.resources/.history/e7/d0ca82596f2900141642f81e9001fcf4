@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:dc="http://java.sun.com/jsf/composite/component">
+<ui:composition template="/template.xhtml">
+	<ui:define name="breadcrumb">
+		<h:link value="Início" outcome="/index" />
+		<h:outputText value=" &raquo; " />
+		<span><h:outputText value="Tipo de Processo" /> </span>
+	</ui:define>
+	<ui:define name="conteudo">
+
+		<p:growl id="msgs" life="3000" />
+		<h1>Tipo de Processo</h1>
+		<br />
+		<span id="span_grid_h">
+			<h:panelGrid columns="2">
+				<h:form id="acoes" prependId="false">
+					<h:commandButton value="Novo" title="Alt + n"
+						action="#{tipoProcessoFormController.novo}"
+						styleClass="button button-blue-green" accesskey="n" />
+					<p:spacer width="5px" />
+					<p:commandButton id="consultar" value="Consultar" 
+						action="#{tipoProcessoFormController.consulta(tipoProcessoFormController.atual)}"
+						styleClass="button button-blue-green"
+						disabled="#{tipoProcessoFormController.atual.id eq null}"
+						accesskey="c" title="Alt+c" />
+					<p:spacer width="5px" />
+					<p:commandButton id="editar" value="Alterar" 
+						action="#{tipoProcessoFormController.edita(tipoProcessoFormController.atual)}"
+						styleClass="button button-blue-green"
+						disabled="#{tipoProcessoFormController.atual.id eq null}"
+						accesskey="a" title="Alt+a" />
+					<p:spacer width="5px" />
+					<p:commandButton value="Remover" 
+						action="#{tipoProcessoFormController.remove(tipoProcessoFormController.atual)}"
+						onclick="return confirm('Deseja realmente excluir o registro ?')"
+						styleClass="button button-red"
+						disabled="#{tipoProcessoFormController.atual.id eq null}"
+						accesskey="r" title="Alt+r" />
+	
+				</h:form>
+			</h:panelGrid>
+		</span>
+		<h:form id="form_objetos" prependId="false">
+			<p:dataTable id="dt_objetos" widgetVar="wdt_objetos"
+				value="#{tipoProcessoListController.modelo}" var="objeto"
+				selectionMode="single"
+				selection="#{tipoProcessoFormController.atual}" 
+				emptyMessage="Nenhum registro encontrado !" paginator="true"
+				paginatorPosition="bottom" rows="20">
+
+				<p:ajax event="rowSelect"
+					listener="#{tipoProcessoFormController.aoSelecionarUmaLinha}"
+					update=":acoes" />
+				<p:ajax event="rowUnselect"
+					listener="#{tipoProcessoFormController.aoDeselecionarUmaLinha}"
+					update=":acoes" />
+
+				<p:column headerText="Descrição" sortBy="#{objeto.descricao}"
+					filterBy="#{objeto.descricao}">
+					<h:outputText value="#{objeto.descricao}" />
+				</p:column>
+				<p:column headerText="Data Criação">
+					<h:outputText
+						value="#{objeto.dataCriacao.noFormato('dd/MM/yyyy')}" />
+				</p:column>
+				<p:column headerText="Utilizado">
+					<h:outputText
+						value="#{objeto.utilizado}" converter="ConverterBooleanString"/>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

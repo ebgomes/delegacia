@@ -1,0 +1,14 @@
+package br.com.rondofrio.remote;
+
+import javax.ejb.Local;
+
+import br.com.rondofrio.arquitetura.CanConfirm;
+import br.com.rondofrio.arquitetura.CanFind;
+import br.com.rondofrio.arquitetura.CanList;
+import br.com.rondofrio.arquitetura.IRemote;
+import br.com.rondofrio.model.TipoDeDocumento;
+
+@Local
+public interface TipoDeDocumentoRemote extends IRemote, CanFind<TipoDeDocumento>, CanConfirm<TipoDeDocumento>, CanList<TipoDeDocumento> {
+
+}

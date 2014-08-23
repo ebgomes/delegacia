@@ -1,0 +1,203 @@
+package br.com.rondofrio.arquitetura;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
+public abstract class ControladorBasicoDeFormulario<Classe extends AbstractEntity & Identifiable, InterfaceRemota extends CanConfirm<Classe> & CanFind<Classe>>
+        implements Serializable {
+
+    private static final long serialVersionUID = -8191718071578889586L;
+
+    /*
+    @Inject
+    private DCContextShared   context;
+    */
+
+    @Inject
+    private HttpSession       sessao;
+
+    private Classe            atual            = criaNovoObjeto();
+
+    /*
+    public DCContextShared getContext() {
+        return context;
+    }
+    */
+
+    protected void antesDeEditar(final Classe objetoQueSeraEditado) {
+    }
+
+    protected void antesDeIncluir(final Classe novo) {
+    }
+
+    protected void antesDeRemover(final Classe objetoQueSeraRemovido) {
+    }
+
+    public String confirma(){
+        try {
+            antesDeConfirmar(getAtual());
+            servidor().confirm(getAtual());
+        } catch (Exception e) {
+            mostraMensagemDeErro(e);
+            return "";
+        }
+        novo();
+        mostraMensagemDeSucesso("Registro efetivado com sucesso!");
+        return redirecionaPara(lista());
+    }
+
+    public String confirmaEContinua(){
+        try {
+            antesDeConfirmar(getAtual());
+            setAtual(servidor().confirm(getAtual()));
+        } catch (Exception e) {
+            mostraMensagemDeErro(e);
+            return "";
+        }
+        mostraMensagemDeSucesso("Registro efetivado com sucesso!");
+        return edita(getAtual());
+    }
+
+    protected void antesDeConfirmar(Classe objetoQueSeraConfirmado){
+    }
+
+    protected abstract Classe criaNovoObjeto();
+
+    public String edita(final Classe objetoQueSeraEditado) {
+        try {
+            setAtual(servidor().reload(objetoQueSeraEditado));
+            getAtual().setEntityState(EntityState.MODIFIED);
+            antesDeEditar(getAtual());
+        } catch (Exception e) {
+            mostraMensagemDeErro(e);
+            return redirecionaPara(lista());
+        }
+        return redirecionaPara(formulario());
+    }
+
+    public String consulta(final Classe objetoQueSeraConsultado) {
+        try {
+            setAtual(servidor().reload(objetoQueSeraConsultado));
+            antesDeConsultar(getAtual());
+        } catch (Exception e) {
+            mostraMensagemDeErro(e);
+            return redirecionaPara(lista());
+        }
+        return redirecionaPara(formulario());
+    }
+
+    protected void antesDeConsultar(Classe objetoQueSeraConsultado){
+    }
+
+    public boolean isConsulta() {
+        return ConfirmaQue.ehNulo(getAtual()) ||
+               ConfirmaQue.ehNulo(getAtual().getEntityState()) ||
+               ConfirmaQue.ehUmDosValores(getAtual().getEntityState(), EntityState.UNMODIFIED);
+    }
+
+    protected abstract InterfaceRemota servidor();
+
+    protected String formulario() {
+        return "formulario.xhtml";
+    }
+
+    public Classe getAtual() {
+        return ConfirmaQue.ehNulo(atual) ? (atual = criaNovoObjeto()) : atual;
+    }
+
+    protected String lista() {
+        return "lista.xhtml";
+    }
+    protected void mostraMensagemDeErro(final Exception e) {
+        new FacesMessageManager().addMessageException(e);
+    }
+
+    protected void mostraMensagemDeSucesso(final String mensagem) {
+        new FacesMessageManager().addMessageInfo(mensagem);
+    }
+
+    protected void mostraMsgGenerica(String msg, Severity severity) {
+        FacesMessage message = new FacesMessage(severity, msg, null);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, message);
+    }
+
+    public String novo(){
+        setAtual(criaNovoObjeto());
+        antesDeIncluir(getAtual());
+        getAtual().setEntityState(EntityState.NEW);
+        return redirecionaPara(formulario());
+    }
+
+    protected String redirecionaPara(final String pagina) {
+        return pagina + (pagina.contains("?") ? "&" : "?") + "faces-redirect=true";
+    }
+
+    public String remove(final Classe objetoQueSeraRemovido){
+        try {
+            setAtual(servidor().reload(objetoQueSeraRemovido));
+            getAtual().setEntityState(EntityState.DELETED);
+            antesDeRemover(getAtual());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return redirecionaPara(lista());
+        }
+        return acaoAoRemover();
+    }
+
+    protected String acaoAoRemover(){
+        return confirma();
+    }
+
+    public void setAtual(final Classe atual) {
+        this.atual = atual;
+    }
+
+    public String voltar() {
+        return redirecionaPara(lista());
+    }
+
+    protected boolean estaAlterando(Classe objeto) {
+        return objeto.getEntityState() == EntityState.NEW || objeto.getEntityState() == EntityState.MODIFIED;
+    }
+
+    public void mudouAlgumValor() {
+    }
+
+    public <T> void trocaADependencia(String nome, T valor) {
+        Map<String, Object> dependencias = getDependencias();
+        dependencias.put(nome, valor);
+    }
+
+    @SuppressWarnings("unchecked")
+    protected Map<String, Object> getDependencias() {
+        Map<String, Object> dependencias = (Map<String, Object>) sessao.getAttribute("dependencia");
+        if (ConfirmaQue.ehNulo(dependencias)) {
+            sessao.setAttribute("dependencia", dependencias = new HashMap<String, Object>());
+        }
+        return dependencias;
+    }
+
+    public List<Integer> getHoras(){ 
+        return NumberUtils.geraInteirosDeXAtehY(0, 23);
+    }
+
+    public List<Integer> getMinutos(){
+        return NumberUtils.geraInteirosDeXAtehY(0, 59);
+    }
+
+    /*
+    public String aoSelecionarUmaData(SelectEvent selecionouUmaData) {
+        return null;
+    }
+    */
+
+}

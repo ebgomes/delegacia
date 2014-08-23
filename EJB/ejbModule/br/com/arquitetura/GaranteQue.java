@@ -1,0 +1,84 @@
+package br.com.arquitetura;
+
+import java.util.Collection;
+
+import com.sun.tools.ws.wsdl.document.jaxws.Exception;
+
+public final class GaranteQue {
+    private GaranteQue() {
+    }
+
+    public static <T> void naoEhNulo(T objeto) {
+        naoEhNulo(objeto, "Objeto nao pode ser nulo!");
+    }
+
+    public static <T> void naoEhNulo(T objeto, String mensagem) {
+        ehVerdade(ConfirmaQue.naoEhNulo(objeto), mensagem);
+    }
+
+    private static void joga(String mensagem) {
+    	//throw new Exception(EnumDCException.ERRO, mensagem);
+    }
+
+    public static void ehVerdade(boolean condicao)  {
+        ehVerdade(condicao, "Condicao nao eh verdadeira!");
+    }
+
+    public static void ehVerdade(boolean condicao, String mensagem)  {
+        if (!condicao) {
+            joga(mensagem);
+        }
+    }
+
+    public static void naoEhNuloNemVazia(String string) {
+        naoEhNulaNemVazia(string, "A string nao pode ser vazia");
+    }
+
+    public static void naoEhNulaNemVazia(String string, String mensagem) {
+        naoEhNulo(string, mensagem);
+        naoEhVazia(string, mensagem);
+    }
+
+    private static void naoEhVazia(String string, String mensagem)  {
+        if (ConfirmaQue.ehUmaStringNulaOuVazia(string)) {
+            joga(mensagem);
+        }
+    }
+
+    public static <T> void naoEhNuloNemVazio(Collection<T> colecao)  {
+        naoEhNulo(colecao);
+        naoEhVazio(colecao);
+    }
+
+    public static <T> void naoEhNuloNemVazio(Collection<T> colecao, String mensagem)  {
+        naoEhNulo(colecao, mensagem);
+        naoEhVazio(colecao, mensagem);
+    }
+
+    public static <T> void naoEhVazio(Collection<T> colecao)  {
+        naoEhVazio(colecao, "Colecao nao pode ser vazia");
+    }
+
+    public static <T> void naoEhVazio(Collection<T> colecao, String mensagem)  {
+        ehVerdade(ConfirmaQue.naoEhUmaColecaoNulaOuVazia(colecao), mensagem);
+    }
+
+    public static void ehNuloOuZero(Number numero, String mensagem)  {
+        ehVerdade(ConfirmaQue.ehUmNumeroNuloOuZero(numero), mensagem);
+    }
+
+    public static void naoEhNuloOuZero(Number numero, String mensagem)  {
+        //ehVerdade(que(ConfirmaQue.naoEhUmNumeroNuloOuZero(numero)), mensagem);
+    	return;
+    }
+    
+    public static void temUmContextoNaListaDeParametros(String mensagem, Object... parametros)  {
+        //ehVerdade(ConfirmaQue.temUmContextoNaListaDeParametros(parametros), mensagem);
+        return;
+    }
+
+    public static void temUmContextoNaListaDeParametros(Object... parametros)  {
+        temUmContextoNaListaDeParametros("Nao foi encontrado um DCContextShared nos parametros", parametros);
+    }
+
+}

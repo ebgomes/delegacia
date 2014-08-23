@@ -1,0 +1,63 @@
+package br.com.rondofrio.ejb;
+
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+
+import br.com.pa.arquitetura.PU;
+import br.com.pa.model.TipoProcesso;
+import br.com.pa.remote.TipoProcessoRemote;
+
+@Stateless
+public class TipoProcessoEJB implements TipoProcessoRemote {
+
+	@PersistenceContext(unitName = PU.UNIT_NAME)
+	private EntityManager em;
+
+	@Override
+	public TipoProcesso findById(Long id) {
+		try {
+			return em
+					.createQuery("from TipoProcesso p where p.id = :id ",
+							TipoProcesso.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+
+	}
+
+	@Override
+	public TipoProcesso reload(TipoProcesso entity) {
+		return findById(entity.getId());
+	}
+
+	@Override
+	public TipoProcesso confirm(TipoProcesso entity) {
+		switch (entity.getEntityState()) {
+
+		case NEW:
+			em.persist(entity);
+			break;
+		case MODIFIED:
+			em.merge(entity);
+			break;
+		case DELETED:
+			em.remove(entity);
+			entity = null;
+		default:
+			break;
+		}
+		return entity;
+	}
+
+	@Override
+	public List<TipoProcesso> list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

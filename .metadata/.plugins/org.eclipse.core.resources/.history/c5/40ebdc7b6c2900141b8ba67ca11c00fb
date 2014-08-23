@@ -1,0 +1,6 @@
+package pa.arquitetura;
+
+public interface IRemote {
+	
+
+}

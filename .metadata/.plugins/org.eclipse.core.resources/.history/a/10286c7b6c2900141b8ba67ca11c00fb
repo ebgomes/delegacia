@@ -1,0 +1,300 @@
+package pa.arquitetura;
+
+import static java.util.Calendar.AM;
+import static java.util.Calendar.AM_PM;
+import static java.util.Calendar.DATE;
+import static java.util.Calendar.DAY_OF_MONTH;
+import static java.util.Calendar.DAY_OF_WEEK;
+import static java.util.Calendar.DECEMBER;
+import static java.util.Calendar.HOUR;
+import static java.util.Calendar.MILLISECOND;
+import static java.util.Calendar.MINUTE;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.PM;
+import static java.util.Calendar.SECOND;
+import static java.util.Calendar.YEAR;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+
+public class DateUtils {
+
+    public static final int        MAIOR_ANO                            = 9999;
+
+    public static final DateFormat FORMATO_PADRAO_DATA                  = new SimpleDateFormat("dd/MM/yyyy");
+
+    public static final DateFormat FORMATO_PADRAO_DATA_HORA_POR_EXTENSO = new SimpleDateFormat("dd 'de' MMMM yyyy',' kk:mm:ss 'hs'");
+
+    public static final DateFormat FORMATO_PADRAO_DATA_HORA             = new SimpleDateFormat("dd/MM/yyyy kk:mm:ss");
+
+    private static final long      MILISEGUNDOS_EM_UM_DIA               = 1000 * 60 * 60 * 24;
+
+    public static Long diasEntreUmaDataEOutra(final Date uma, final Date outra) {
+        Calendar _uma = Calendar.getInstance();
+        Calendar _outra = Calendar.getInstance();
+        _uma.setTime(uma);
+        _outra.setTime(outra);
+        long inicio = _uma.getTimeInMillis() + _uma.getTimeZone().getOffset(_uma.getTimeInMillis());
+        long fim = _outra.getTimeInMillis() + _outra.getTimeZone().getOffset(_outra.getTimeInMillis());
+        return Math.abs((fim - inicio) / MILISEGUNDOS_EM_UM_DIA);
+    }
+
+    public static Date hoje() {
+        return new Date(Calendar.getInstance().getTimeInMillis());
+    }
+
+    public static java.sql.Date dataSqlHoje() {
+        return new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+    }
+
+    public static Date infinito() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(DAY_OF_MONTH, 31);
+        calendar.set(MONTH, DECEMBER);
+        calendar.set(YEAR, MAIOR_ANO);
+        return new Date(calendar.getTimeInMillis());
+    }
+
+    public static final Date nova(final String data) {
+        return nova(data, FORMATO_PADRAO_DATA);
+    }
+
+    public static final Date nova(final String data, final DateFormat formatador) {
+        try {
+            Calendar oficial = Calendar.getInstance();
+            Calendar auxiliar = Calendar.getInstance();
+            auxiliar.setTime(formatador.parse(data));
+            oficial.set(DAY_OF_MONTH, auxiliar.get(DAY_OF_MONTH));
+            oficial.set(MONTH, auxiliar.get(MONTH));
+            oficial.set(YEAR, auxiliar.get(YEAR));
+            return new Date(oficial.getTimeInMillis());
+        } catch (ParseException erro) {
+            throw new RuntimeException(erro);
+        }
+    }
+
+    /**
+     *
+     * @param data dd/MM/aaaa
+     * @param hora hh:mm:ss
+     * @return nova data / hora
+     */
+    public static final Date nova(final String data, final String hora) {
+        return nova(data, hora, FORMATO_PADRAO_DATA_HORA);
+    }
+
+    /**
+     *
+     * @param data dd/MM/aaaa
+     * @param hora hh:mm:ss
+     * @return nova data / hora
+     */
+    public static final Date nova(final String data, final String hora, final DateFormat formatador) {
+        try {
+            return formatador.parse(data.trim().concat(" ").concat(hora.trim()));
+        } catch (ParseException erro) {
+            throw new RuntimeException(erro);
+        }
+    }
+
+    public static Date ontem() {
+        return ontem(hoje());
+    }
+
+    public static Date ontem(final Date hoje) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(hoje);
+        calendar.set(DAY_OF_MONTH, calendar.get(DAY_OF_MONTH) - 1);
+        return new Date(calendar.getTimeInMillis());
+    }
+
+    public static Date primeiroDiaDoMes() {
+        return primeiroDiaDoMes(hoje());
+    }
+
+    public static Date primeiroDiaDoMes(final Date atual) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(atual);
+        calendar.set(DAY_OF_MONTH, 1);
+        return new Date(calendar.getTimeInMillis());
+    }
+
+    public static Integer recupera(final Date atual, final int campo) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(atual);
+        return calendar.get(campo);
+    }
+
+    public static Integer recuperaDiaDaSemana(final Date atual) {
+        return recupera(atual, DAY_OF_WEEK);
+    }
+
+    public static Integer recuperaAno(final Date atual) {
+        return recupera(atual, YEAR);
+    }
+
+    public static Integer recuperaDia(final Date atual) {
+        return recupera(atual, DAY_OF_MONTH);
+    }
+
+    public static Integer recuperaHora(final Date atual) {
+        return recupera(atual, HOUR);
+    }
+
+    public static Integer recuperaMes(final Date atual) {
+        return recupera(atual, MONTH);
+    }
+
+    public static Integer recuperaMilisegundo(final Date atual) {
+        return recupera(atual, MILLISECOND);
+    }
+
+    public static Integer recuperaMinuto(final Date atual) {
+        return recupera(atual, MINUTE);
+    }
+
+    public static Integer recuperaSegundo(final Date atual) {
+        return recupera(atual, SECOND);
+    }
+
+    public static Date soma(final Date atual, final int campo, final int valor) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(atual);
+        calendar.add(campo, valor);
+        return new Date(calendar.getTimeInMillis());
+    }
+
+    public static Date somaAnos(final Date atual, final int valor) {
+        return soma(atual, YEAR, valor);
+    }
+
+    public static Date somaDiasNoMes(final Date atual, final int valor) {
+        return soma(atual, DAY_OF_MONTH, valor);
+    }
+
+    public static Date somaHoras(final Date atual, final int valor) {
+        return soma(atual, HOUR, valor);
+    }
+
+    public static Date somaMeses(final Date atual, final int valor) {
+        return soma(atual, MONTH, valor);
+    }
+
+    public static Date somaMilisegundos(final Date atual, final int valor) {
+        return soma(atual, MILLISECOND, valor);
+    }
+
+    public static Date somaMinutos(final Date atual, final int valor) {
+        return soma(atual, MINUTE, valor);
+    }
+
+    public static Date somaSegundos(final Date atual, final int valor) {
+        return soma(atual, SECOND, valor);
+    }
+
+    public static Date subtrai(final Date atual, final int campo, final int valor) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(atual);
+        calendar.set(campo, calendar.get(campo) - valor);
+        return new Date(calendar.getTimeInMillis());
+    }
+
+    public static Date subtraiAnos(final Date atual, final int valor) {
+        return subtrai(atual, YEAR, valor);
+    }
+
+    public static Date subtraiDiasNoMes(final Date atual, final int valor) {
+        return subtrai(atual, DAY_OF_MONTH, valor);
+    }
+
+    public static Date subtraiHoras(final Date atual, final int valor) {
+        return subtrai(atual, HOUR, valor);
+    }
+
+    public static Date subtraiMeses(final Date atual, final int valor) {
+        return subtrai(atual, MONTH, valor);
+    }
+
+    public static Date subtraiMilisegundos(final Date atual, final int valor) {
+        return soma(atual, MILLISECOND, valor);
+    }
+
+    public static Date subtraiMinutos(final Date atual, final int valor) {
+        return soma(atual, MINUTE, valor);
+    }
+
+    public static Date subtraiSegundos(final Date atual, final int valor) {
+        return subtrai(atual, SECOND, valor);
+    }
+
+    public static Date ultimoDiaDoMes() {
+        return ultimoDiaDoMes(hoje());
+    }
+
+    public static Date ultimoDiaDoMes(final Date atual) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(atual);
+        calendar.set(DAY_OF_MONTH, calendar.getActualMaximum(DATE));
+        return new Date(calendar.getTimeInMillis());
+    }
+
+    public static Integer get(Date atual, int campo) {
+        return recupera(atual, campo);
+    }
+
+    private static Date troca(Date atual, int campo, Integer valor) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(atual);
+        calendar.set(campo, valor);
+        return new Date(calendar.getTimeInMillis());
+    }
+
+    public static Date trocaAHora(Date atual, Integer valor) {
+        Boolean estaEntre12E24Horas = NumberUtils.estaNaFaixaInclusive(valor, 12, 24);
+        int periodo = estaEntre12E24Horas ? PM : recupera(atual, AM_PM);
+        valor = (periodo == PM && estaEntre12E24Horas ? valor - 12 : valor);
+        return trocaOPeriodo(troca(atual, HOUR, valor), periodo);
+    }
+
+    public static Date trocaOMes(Date atual, Integer valor) {
+        return troca(atual, MONTH, valor);
+    }
+
+    public static Date trocaODiaDoMes(Date atual, Integer valor) {
+        return troca(atual, DAY_OF_MONTH, valor);
+    }
+
+    public static Date trocaOAno(Date atual, Integer valor) {
+        return troca(atual, YEAR, valor);
+    }
+
+    public static Date trocaOMinuto(Date atual, Integer valor) {
+        return troca(atual, MINUTE, valor);
+    }
+
+    public static Date trocaOSegundo(Date atual, Integer valor) {
+        return troca(atual, SECOND, valor);
+    }
+
+    public static Date trocaOMiliSegundo(Date atual, Integer valor) {
+        return troca(atual, MILLISECOND, valor);
+    }
+
+    public static Date trocaOPeriodo(Date atual, Integer valor) {
+        try {
+            GaranteQue.ehVerdade(valor == AM || valor == PM);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return troca(atual, AM_PM, valor);
+    }
+
+    public static String porExtenso(Date data) {
+        return FORMATO_PADRAO_DATA_HORA_POR_EXTENSO.format(data);
+    }
+
+}

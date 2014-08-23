@@ -1,0 +1,233 @@
+/*
+    Document   : default
+    Created on : 16/03/2010, 09:49:26
+    Author     : Thiago Felipe Festa
+    Description:
+        Folha de estilo padr�o, sempre necessita importar ela em seu HTML
+*/
+
+@import '../resources/css/reset.css';
+@import '../resources/css/button.css';
+/*@import '../resources/css/form.css';*/
+@import '../resources/css/table.css';
+@import '../resources/css/menu.css';
+@import '../resources/css/seletor.css';
+@import '../resources/css/message.css';
+/*@import 'drag_drop.css';*/
+/*@import 'invalid.css';*/
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font: 76% Verdana,"Bitstream Vera Sans","DejaVu Sans","Liberation Sans",Geneva,sans-serif;
+    color: #464646;
+    text-align: center;
+    background-color: #EEEEEE;
+}
+
+a {
+    color: #3b9805;
+    text-decoration: none;
+}
+
+.ui-widget 
+{
+	font-size: 12px;
+}
+
+td {
+    vertical-align:top;
+}
+
+.clear {
+    clear: both;
+}
+
+.float-left {
+    float: left;
+    display: inline-block;
+    width: auto;
+}
+
+.float-right {
+    float: right;
+    display: inline-block;
+    width: auto;
+}
+
+.pf-panel-bd
+{
+    background: #FFFFFF !important;
+}
+
+/*
+.wrap {
+    position: relative;
+    margin: 0px 6px;
+}
+*/
+
+.display-inline
+{
+    display: inline;
+}
+
+#tudo
+{
+    background: none repeat-y scroll right center #FFFFFF;
+    clear: both;
+    margin: 0 auto;
+    min-height: 100%;
+    position: relative;
+    text-align: left;
+    /*width: 1024px;*/
+}
+
+#header, #breadcrumb, #content, #footer {
+    min-width: 800px;
+}
+
+#header {
+    height: 66px;
+    border-bottom: 1px solid #E0E0E0;
+    background-color: #F4F4F4;
+    margin-left: 0px;
+}
+
+#header .logo {
+    display: inline-block;
+    float: left;
+    background: #F4F4F4;
+    padding-left: 5px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+#header .detail {
+    width: 420px;
+    height: 66px;
+    display: inline-block;
+    float: right;
+    background: #F4F4F4 url("../resources/images/logo_sistema.png") no-repeat top right;
+}
+
+#breadcrumb {
+    background: #f2f3f1;
+    height: 19px;
+    line-height: 19px;
+    font-size: 10px;
+    color: #999797;
+}
+
+#breadcrumb .wrap {
+    margin: 0px 1px 0px 12px;
+}
+
+#breadcrumb a {
+    color: #999797;
+}
+
+#breadcrumb div.float-left span {
+    color: #3b9805;
+}
+
+#breadcrumb div.float-right a.logout {
+    display: block;
+    height: 19px;
+    line-height: 19px;
+    padding-right: 17px;
+    background: url("../resources/images/logout.gif") no-repeat center right;
+}
+
+#content {
+    padding: 10px;
+}
+
+#content .wrap {
+    margin: 0px 60px;
+    padding: 40px 0px;
+}
+
+#content h1 {
+    font-size: 18px;
+    color: #3b9805;
+    font-weight: normal;
+    margin-bottom: 5px;
+    
+}
+
+#content h2 {
+    font-size: 12px;
+    color: #146eb4;
+    margin-bottom: 3px;
+}
+
+#content h3 {
+    font-size: 24px;
+    color: #3b9805;
+    font-weight: normal;
+    margin-bottom: 5px;
+    
+}
+
+
+#content h2.gray {
+    color: #999797;
+}
+
+#clear{
+    clear: both;
+    height: 30px;
+}
+
+#footer {
+    background: none repeat scroll 0 0 #EEEEEE;
+    bottom: 0;
+    color: #999797;
+    font-size: 10px;
+    height: 19px;
+    line-height: 19px;
+    position: absolute;
+    text-align: center;
+    /*width: 1024px;*/
+    width: 100%;
+}
+
+#subconteudo {
+    margin: 0 auto;
+    position: relative;
+}
+
+#logout
+{
+	margin: 0 5px;
+	background: url("../resources/images/close-window.png") no-repeat center right;
+	
+}
+
+.ui-message-error 
+{
+	display: inline;
+}
+
+.negrito
+{
+	font-weight: bold;
+}
+
+.link{
+	height: 50 px;
+	position:inherit;
+		
+	margin-left: 50px;
+	}
+.ui-corner-all{ /*alinha o autocomplete a esquerda*/
+    text-align: left;
+}
+.estoquebaixo{  
+    color: red;
+    font-weight: bold;  
+}  

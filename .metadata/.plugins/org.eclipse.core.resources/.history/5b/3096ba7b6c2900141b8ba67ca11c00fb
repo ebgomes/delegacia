@@ -1,0 +1,11 @@
+package pa.arquitetura;
+
+import javax.validation.Valid;
+
+import javax.validation.constraints.NotNull;
+
+public interface CanConfirm <Type extends Identifiable>{
+	
+	Type confirm(@Valid @NotNull Type entity);
+
+}

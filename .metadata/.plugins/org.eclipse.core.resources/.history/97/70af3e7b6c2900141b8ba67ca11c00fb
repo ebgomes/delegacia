@@ -1,0 +1,10 @@
+package pa.arquitetura;
+
+import javax.validation.constraints.NotNull;
+
+public interface CanFind <Type extends Identifiable>{
+	
+	Type findById(@NotNull Long id);
+	Type reload(@NotNull Type entity);
+
+}

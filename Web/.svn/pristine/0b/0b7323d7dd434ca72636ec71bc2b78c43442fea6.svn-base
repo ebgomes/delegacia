@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:dc="http://java.sun.com/jsf/composite/component">
+
+<ui:composition template="/template.xhtml">
+	<ui:define name="breadcrumb">
+		<h:link value="Início" outcome="/index" />
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText value="Dogs" />
+		</span>
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText
+				value="#{materialFormController.consulta ? 'Consulta' : 'Cadastro'}" />
+		</span>
+	</ui:define>
+	<ui:define name="conteudo">
+		<p:growl id="msg"/>
+		<h1>#{materialFormController.consulta ? 'Material' : 'Material'}</h1>
+		<p:panel>
+			<h:form>
+				<br />
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Descricao..:" />
+					<h:inputText size="75"
+						value="#{materialFormController.atual.descricao}" required="true"
+						disabled="#{materialFormController.consulta}" maxlength="255" requiredMessage="Campo Descição Obrigatório">
+						<p:ajax listener="#{materialFormController.mudouAlgumValor}" />
+					</h:inputText>
+					<h:outputLabel value="Unidade Medida..:" />
+					<p:selectOneMenu size="1"
+						value="#{materialFormController.atual.unidadeMedida.codigo}"
+						required="true" requiredMessage="Campo Unidade Medida Obrigatório">
+						<f:selectItem value="#{null}" itemLabel="-" />
+						<!-- "#{materialFormController.unidadeMedida}" é equivalente a um metodo no controador chamdao getUnidadeMedida -->
+						<f:selectItems value="#{materialFormController.unidadeMedida}"
+							var="unidadeMedida" itemValue="#{unidadeMedida.id}"
+							itemLabel="#{unidadeMedida.descricao}" />
+						<p:ajax listener="#{materialFormController.mudouAlgumValor}" />
+					</p:selectOneMenu>
+					<h:outputLabel value="Peso Bruto..:" />
+					<h:inputText size="25"
+						value="#{materialFormController.atual.pesoBruto}" 
+						disabled="#{materialFormController.consulta}" maxlength="255">
+						<p:ajax listener="#{materialFormController.mudouAlgumValor}" />
+					</h:inputText>
+					<h:outputLabel value="Peso Liquido..:" />
+					<h:inputText size="25"
+						value="#{materialFormController.atual.pesoLiquido}"
+						disabled="#{materialFormController.consulta}"
+						maxlength="255">
+						<p:ajax listener="#{materialFormController.mudouAlgumValor}" />
+					</h:inputText>					
+					<p:outputLabel value="Aceita Estoque Negativo..:" />				 	
+				 	<p:selectBooleanCheckbox value="#{materialFormController.atual.aceitaEstoqueNegativo}"> 
+					<p:ajax listener="#{materialFormController.mudouAlgumValor}" />
+					</p:selectBooleanCheckbox>
+					
+				</h:panelGrid>
+			
+				<br />
+			
+				<h:inputHidden value="#{materialFormController.atual.entityState}" />
+				<p:commandButton value="Confirma"
+					action="#{materialFormController.confirma}"
+					styleClass="button button-blue-green" process="@form"
+					rendered="#{!materialFormController.consulta}" update=":msg" />					
+				<p:commandButton value="Voltar"
+					action="#{materialFormController.voltar}"
+					styleClass="button button-blue-green" immediate="true" />
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

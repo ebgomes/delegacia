@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:dc="http://java.sun.com/jsf/composite/component">
+
+
+<ui:composition template="/template.xhtml">
+
+	<ui:define name="breadcrumb">
+		<h:link value="Início" outcome="/index" />
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText value="Dogs" />
+		</span>
+		<h:outputText value=" &raquo; " />
+		<span> <h:outputText
+				value="#{faturamentoFormController.consulta ? 'Consulta' : 'Cadastro'}" />
+		</span>
+	</ui:define>
+	<ui:define name="conteudo">
+		<p:growl id="msg" />
+		<h1>#{faturamentoFormController.consulta ? '' : ''}</h1>
+		<p:panel>
+
+			<h:form>
+				<br />
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Número Documento..:" />
+					<p:inputText size="15"
+						value="#{faturamentoFormController.atual.numeroDocumento}"
+						required="true" disabled="#{faturamentoFormController.consulta}"
+						maxlength="255">
+						<p:ajax listener="#{faturamentoFormController.mudouAlgumValor}" />
+					</p:inputText>
+
+					<h:outputText value="Data de Movimento: " />
+					<p:calendar
+						value="#{faturamentoFormController.atual.dataMovimento.conteudo}"
+						required="true" showOn="button" pattern="dd/MM/yyyy"
+						readOnlyInputText="true"
+						selectListener="#{faturamentoFormController.aoSelecionarUmaData}"
+						disabled="#{faturamentoFormController.consulta}">
+						<p:ajax listener="#{faturamentoFormController.mudouAlgumValor}"
+							process="@this" />
+					</p:calendar>
+
+					<h:outputLabel value="Parceiro Comercial..:" />
+					<p:autoComplete id="parceiro" required="true" size="100"
+						requiredMessage="Campo Parceiro Obrigatório"
+						value="#{faturamentoFormController.atual.parceiro}"
+						completeMethod="#{faturamentoFormController.parceiroParaAutoComplete}"
+						var="entidade" itemValue="#{entidade}"
+						itemLabel="#{entidade.nome}" immediate="true" maxResults="20"
+						converter="#{parceiroConverter}">
+						<p:column headerText="Nome Parceiro">  
+	                    	#{entidade.nome}     
+		                </p:column>
+						<p:column headerText="CNPJ/CPF">   
+	                    	#{entidade.cnpjcpf}     
+		                </p:column>
+						<p:column headerText="Cidade">  
+	                    	#{entidade.descricaoCidade}      
+		                </p:column>
+					</p:autoComplete>
+  
+					<p:outputLabel value="Tipo Movimento..:" />
+					<p:selectOneMenu size="1"
+						value="#{faturamentoFormController.atual.tipoDeMovimento.codigo}"
+						required="true"
+						requiredMessage="Campo Tipo de Movimento é Obrigatório">
+						<f:selectItem value="#{null}" itemLabel="-" />
+						<f:selectItems
+							value="#{faturamentoFormController.tipoDeMovimento}"
+							var="tipoDeMovimento" itemValue="#{tipoDeMovimento.id}"
+							itemLabel="#{tipoDeMovimento.descricao}" />
+						<p:ajax listener="#{faturamentoFormController.mudouAlgumValor}" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Tipo Documento..:" />
+					<p:selectOneMenu size="1"
+						value="#{faturamentoFormController.atual.tipoDeDocumento.codigo}"
+						required="true"
+						requiredMessage="Campo Tipo de Documento é Obrigatório">
+						<f:selectItem value="#{null}" itemLabel="-" />
+						<f:selectItems
+							value="#{faturamentoFormController.tipoDeDocumento}"
+							var="tipoDeDocumento" itemValue="#{tipoDeDocumento.id}"
+							itemLabel="#{tipoDeDocumento.descricao}" />
+						<p:ajax listener="#{faturamentoFormController.mudouAlgumValor}" /> 
+					</p:selectOneMenu>
+
+				</h:panelGrid>
+				<h:inputHidden
+					value="#{faturamentoFormController.atual.entityState}" />
+				<p:commandButton value="Confirma"
+					action="#{faturamentoFormController.confirma}"
+					styleClass="button button-blue-green" process="@form"
+					rendered="#{!faturamentoFormController.consulta}" update=":msg" />
+				<p:commandButton value="Voltar"
+					action="#{faturamentoFormController.voltar}"
+					styleClass="button button-blue-green" immediate="true" />
+
+				<p:tabView id="tabPrincipal" dynamic="true">
+					<p:tab title="Itens">
+						<h:outputLabel value="Número Documento..:" />
+						<p:inputText size="15"
+							value="#{faturamentoFormController.atual.numeroDocumento}"
+							required="true" disabled="#{faturamentoFormController.consulta}"
+							maxlength="255">
+							<p:ajax listener="#{faturamentoFormController.mudouAlgumValor}" />
+						</p:inputText>
+					</p:tab>
+				</p:tabView>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+</html>

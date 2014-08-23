@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:h="http://java.sun.com/jsf/html" 
+	  xmlns:f="http://java.sun.com/jsf/core" 
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ui="http://java.sun.com/jsf/facelets" 
+	  xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title><ui:insert name="pageTitle">Controle de Processos</ui:insert></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="default.css" />
+	<h:outputScript library="js" name="global.js" />
+	<link rel="shortcut icon" href="#{resource['images:favicon.ico']}" type="image/x-icon" />
+	<ui:insert name="css">
+
+	</ui:insert>
+</h:head>
+<h:body>
+	<div id="tudo">
+
+		<div id="subconteudo">
+
+			<ui:insert name="header">
+				<div id="header">
+					<a href="#{facesContext.externalContext.requestContextPath}/"><img src="#{resource['images:rondo3.jpg']}" class="logo" /></a>
+					<p:outputPanel rendered="#{not empty sessionScope['usuario']}">
+						<div class="detail"></div>
+					</p:outputPanel>
+				</div>
+			</ui:insert>
+
+			<ui:insert name="menu">
+				<p:menubar id="menuBar" autoDisplay="false" effectDuration="0">
+					<p:submenu label="Cadastros">
+						<p:menuitem value="Tipos de Processos" url="/tipodeprocesso/lista.xhtml" />
+						
+					</p:submenu>
+				</p:menubar>
+			</ui:insert>
+
+			<ui:insert name="navegacao">
+				<p:outputPanel rendered="#{not empty sessionScope['login']}">
+					<div id="breadcrumb">
+						<div class="wrap">
+							<div class="float-left">
+								<ui:insert name="breadcrumb">
+									<a href="#">Inicio</a> &raquo;
+	                                </ui:insert>
+							</div>
+
+							<div id="logout" class="float-right">
+								<h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout.xhtml" rendered="#{not empty sessionScope['login']}">
+									<h:outputText value="Usuario: #{sessionScope['usuario']}  -  Sair &nbsp;&nbsp;&nbsp;&nbsp;"></h:outputText>
+								</h:outputLink>
+							</div>
+							<div class="clear"></div>
+						</div>
+
+					</div>
+				</p:outputPanel>
+			</ui:insert>
+
+			<div id="content">
+				<ui:insert name="conteudo">
+
+				</ui:insert>
+			</div>
+
+			<div id="clear"></div>
+		</div>
+
+		<ui:insert name="footer">
+			<div id="footer">
+				<div class="wrap">&copy; PA - Sistema para Controle de Processos Administrativos</div>
+			</div>
+		</ui:insert>
+	</div>
+	
+	<h:outputScript library="datacoper" name="js/button.js" target="body" />
+	<h:outputScript library="datacoper" name="js/datacoper-init.js" target="body" />
+	<h:outputScript library="datacoper" name="js/datacoper-event.js" target="body" />
+	<h:outputScript library="js" name="locale-primefaces.js"  /> 
+
+</h:body>
+</html>
+
